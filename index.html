@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===============================================-->
+  <!--    Document Title-->
+  <!-- ===============================================-->
+  <title>iOPEX Portfolio</title>
+  <!-- <style>
+      .fullscreen-prompt {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-size: 20px;
+        z-index: 999;
+        cursor: pointer;
+      }
+    </style> -->
+
+  <!-- ===============================================-->
+  <!--    Favicons-->
+  <!-- ===============================================-->
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico"> -->
+  <!-- <link rel="manifest" href="assets/img/favicons/manifest.json"> -->
+  <!-- <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png"> -->
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- ===============================================-->
+  <!--    Stylesheets-->
+  <!-- ===============================================-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&amp;display=swap"
+    rel="stylesheet">
+  <link href="assets/css/prism.css" rel="stylesheet">
+  <link href="assets/css/theme.min.css" rel="stylesheet" />
+  <link href="assets/css/user.min.css" rel="stylesheet" />
+  <link href="assets/css/swiper-bundle.min.css" rel="stylesheet">
+  <!-- <link href="assets/css/prism.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  <!-- <button class="fullscreen-button">Go full screen for a better experience.</button> -->
+  <!-- <div id="fullscreen-prompt"></div> -->
+
+  <!-- <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const elem = document.documentElement;
+    
+      function requestFullscreen() {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { 
+          elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { 
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { 
+          elem.msRequestFullscreen();
+        }
+      }
+    
+      function isDesktop() {
+        return window.innerWidth > 1000; 
+      }
+    
+      if (isDesktop()) {
+        ['mouseover', 'mouseenter', 'focus', 'click'].forEach(event => {
+          document.body.addEventListener(event, requestFullscreen);
+        });
+      }
+    });
+
+    </script> -->
+  <!-- ===============================================-->
+  <!--    Main Content-->
+  <!-- ===============================================-->
+  <main class="main" id="top">
+
+
+    <!-- ============================================-->
+    <!-- Preloader ==================================-->
+    <!-- <div class="preloader" id="preloader"> -->
+    <!-- <div class="loader"><span> </span><span></span><span></span><span></span><span> </span></div> -->
+    <!-- </div> -->
+    <!-- ============================================-->
+    <!-- End of Preloader ===========================-->
+    <div class="offcanvas offcanvas-start home-content show" id="offcanvasStart" tabindex="-1" data-bs-backdrop="false"
+      data-bs-scroll="true" data-base-content="home">
+
+      <div class="top-text">
+
+        <div class="logo-container">
+          <img class="mb-3 logo" src="assets/img/iopex_logo.svg" alt="logo">
+        </div>
+        <div class="title">Creative Services Portfolio</div>
+      </div>
+
+
+
+
+
+      <div class="offcanvas-body d-flex flex-column flex-center">
+        <ul class="honeycomb" lang="es">
+          <li class="honeycomb-cell">
+            <a href="#static_creatives">
+              <img class="honeycomb-cell__image" src="assets/img/creative.jpg">
+              <div class="honeycomb-cell__title"></div>
+            </a>
+            <!-- <div class="honeycomb-cell__title">Static Creatives</div> -->
+          </li>
+          <li class="honeycomb-cell">
+            <a href="#add_copy">
+              <img class="honeycomb-cell__image" src="assets/img/ad.jpg">
+              <div class="honeycomb-cell__title"></div>
+            </a>
+          </li>
+          <li class="honeycomb-cell">
+            <a href="#motion">
+              <img class="honeycomb-cell__image" src="assets/img/gip.jpg">
+              <div class="honeycomb-cell__title"></div>
+            </a>
+          </li>
+          <li class="honeycomb-cell">
+            <a href="#animation">
+              <img class="honeycomb-cell__image" src="assets/img/anim.jpg">
+              <div class="honeycomb-cell__title"></div>
+            </a>
+          </li>
+          <li class="honeycomb-cell">
+            <a href="#playable">
+              <img class="honeycomb-cell__image" src="assets/img/game.jpg">
+              <div class="honeycomb-cell__title"></div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div></div>
+    
+    <!-- ============================================-->
+    <!-- <section> begin STATIC CREATIVES============================-->
+    <section class="p-0 page d-none" id="static_creatives">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-11 col-xl-11 order-1 order-lg-0 pt-5 pt-lg-4 pt-xl-4 pt-xxl-4 pb-0">
+            <div class="row flex-center">
+              <div class="col-lg-10 col-xl-7 pt-5 modal-contentt">
+                <div class="row">
+                  <div class="text-center mb-5 col-9 col-lg-11">
+                    <h2><span class="fw-black">Static</span> Creatives</h2>
+                  </div>
+                  <!-- <div class="mb-5 col-3 col-lg-1" data-sidebar-close="sidebar-close">
+                      <div class="closex">X</div>
+                  </div> -->
+                </div>
+                
+
+                <div class="row g-2 mt-2" id="portfolio-gallery" data-isotope='{"layoutMode":"packery"}'>
+                                     
+                  <!-- row 1 -->
+                  <div class="col-12 col-md-3 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/Storefront.png" alt="" />
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-6 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/Cocacola.png" alt="" />
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-3 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/Dove.png" alt="" />
+                    </div>
+                  </div>
+                  
+                <!-- row 2 -->
+                  <div class="col-12 col-md-5 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/Nestlé_Creative.png" alt="" />
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-7 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/PCO.png" alt="" />
+                    </div>
+                  </div>
+
+                  <!-- row 3 -->
+
+                  <div class="col-12 col-md-7 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/le Fat Bastard.png" alt="" />
+                    </div>
+                  </div>
+                  
+
+                  <div class="col-12 col-md-5 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/Regio_Creative.png" alt="" />
+                    </div>
+                  </div>
+
+                  <!-- row 4 -->
+
+                  <div class="col-12 col-md-5 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/Shoppable_Creative.png" alt="" />
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-7 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/Starbucks.png" alt="" />
+                    </div>
+                  </div>
+
+                  <!-- row 5 -->
+
+                  <div class="col-12 col-md-5 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                        src="assets/img/static/walmart/mexx shop now.png" alt="" />
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-7 masonry-item photography">
+                    <div class="row g-2 mt-2" id="portfolio-gallery" data-isotope='{"layoutMode":"packery"}'>
+                      
+                      <div class="col-12 col-md-12 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                            src="assets/img/static/walmart/cocacola.png" alt="" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                            src="assets/img/static/walmart/disney baby.png" alt="" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                            src="assets/img/static/walmart/keurig-.jpg" alt="" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                            src="assets/img/static/walmart/nutella-.jpg" alt="" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                            src="assets/img/static/walmart/planet_oats-.jpg" alt="" />
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-12 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden"><img class="img-fluid"
+                            src="assets/img/static/walmart/welchs-.jpg" alt="" />
+                        </div>
+                      </div>
+
+                      </div>
+                    </div>
+                    
+                  </div>
+                  
+                  <!-- <div class="col-12 col-md-12 masonry-item photography"> -->
+                  </div>
+                </div>
+              </div>
+
+            
+            <div class="col-lg-1 col-xl-1 col-12 position-absolute position-lg-relative ps-lg-0">
+              <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
+                <div class="btn-close-boots-container times">
+                  <div class="btn-close-boots"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of .container-->
+    </section><!-- <section> close ============================-->
+    <!-- ============================================-->
+
+    <!-- ============================================-->
+    <!-- <section> begin STATIC CREATIVES============================-->
+      <section class="p-0 page d-none" id="add_copy">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-11 col-xl-11 order-1 order-lg-0 pt-5 pt-lg-4 pt-xl-4 pt-xxl-4 pb-0">
+              <div class="row flex-center">
+                <div class="col-lg-10 col-xl-7 modal-contentt">
+                  <div class="row">
+                    <div class="text-center mb-5 col-9 col-lg-11">
+                      <h2><span class="fw-black">AD</span> Copy</h2>
+                    </div>
+                  </div>      
+                  
+                  <div class="row g-2 pb-4 mb-2" id="portfolio-gallery" data-isotope='{"layoutMode":"packery"}'>
+                    <!-- row 1 -->
+                    <div class="col-12 col-md-2 masonry-item photography">
+                      </div>
+                    <div class="col-12 col-md-8 masonry-item photography">
+                      <div class="card hoverbox overflow-hidden">
+                        <img class="img-fluid"
+                             src="assets/img/thumb2.png" alt="Video Thumbnail" onclick="playVideo1()">
+                        <video id="video1" class="img-fluid videobg" src="https://imediabay.github.io/videos/add/volvo.mp4" controls playsinline style="display: none;">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-2 masonry-item photography">
+                    </div>
+                    <script>
+                      function playVideo1() {
+                        const video = document.getElementById('video1');
+                        const thumbnail = event.target;
+                        thumbnail.style.display = 'none';
+                        video.style.display = 'block';
+                        video.play();
+                      }
+                    </script>
+                    <div class="col-12 col-md-12 masonry-item photography">
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+            <div class="col-lg-1 col-xl-1 col-12 position-absolute position-lg-relative ps-lg-0">
+              <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
+                <div class="btn-close-boots-container times">
+                  <div class="btn-close-boots"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+      </section><!-- <section> close ============================-->
+      <!-- ============================================-->
+
+<!-- ============================================-->
+    <!-- <section> begin STATIC CREATIVES============================-->
+      <section class="p-0 page d-none" id="motion">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-11 col-xl-11 order-1 order-lg-0 pt-5 pt-lg-4 pt-xl-4 pt-xxl-4 pb-0">
+              <div class="row flex-center">
+                <div class="col-lg-10 col-xl-7 modal-contentt">
+                  <div class="row">
+                    <div class="text-center mb-5 col-9 col-lg-11">
+                      <h2><span class="fw-black">Motion</span> Graphics</h2>
+                    </div>
+                  </div>
+                  
+  
+                  <div class="row g-2 pb-5 mb-2" id="portfolio-gallery" data-isotope='{"layoutMode":"packery"}'>
+                     
+                    
+                    <!-- row 1 -->
+                    <div class="col-12 col-md-2 masonry-item photography"></div>
+                    <div class="col-12 col-md-5 masonry-item photography">
+                      <div class="card hoverbox overflow-hidden">
+                        <img class="img-fluid"
+                             src="assets/img/money.jpg" alt="Video Thumbnail" onclick="playVideo3()">
+                        <video id="video3" class="img-fluid" src="https://imediabay.github.io/videos/motion/ANI_NerdWallet.mp4" muted playsinline style="display: none;">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-5 masonry-item photography">
+                      <div class="card hoverbox overflow-hidden">
+                        <img class="img-fluid"
+                             src="assets/img/dow.jpg" alt="Video Thumbnail" onclick="playVideo4()">
+                        <video id="video4" class="img-fluid" src="https://imediabay.github.io/videos/motion/Email_Widget_2.mp4" muted playsinline style="display: none;">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    <!-- Row 2 -->
+                    <div class="col-12 col-md-2 masonry-item photography"></div>
+                    <div class="col-12 col-md-5 masonry-item photography">
+                      <div class="card hoverbox overflow-hidden">
+                        <img class="img-fluid"
+                             src="assets/img/feture.jpg" alt="Video Thumbnail" onclick="playVideo5()">
+                        <video id="video5" class="img-fluid" src="https://imediabay.github.io/videos/motion/FeaturesAcq.mp4" muted playsinline style="display: none;">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    
+                    <div class="col-12 col-md-5 masonry-item photography">
+                      <div class="card hoverbox overflow-hidden">
+                        <img class="img-fluid"
+                             src="assets/img/ru.jpg" alt="Video Thumbnail" onclick="playVideo6()">
+                        <video id="video6" class="img-fluid" src="https://imediabay.github.io/videos/motion/French_Acq.mp4" muted playsinline style="display: none;">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    
+                    </div>
+                    
+                    <script>
+                      function playVideo3() {
+                        const video = document.getElementById('video3');
+                        const thumbnail = event.target;
+                        thumbnail.style.display = 'none';
+                        video.style.display = 'block';
+                        video.play();
+                      }
+                      function playVideo4() {
+                        const video = document.getElementById('video4');
+                        const thumbnail = event.target;
+                        thumbnail.style.display = 'none';
+                        video.style.display = 'block';
+                        video.play();
+                      }
+                      function playVideo5() {
+                        const video = document.getElementById('video5');
+                        const thumbnail = event.target;
+                        thumbnail.style.display = 'none';
+                        video.style.display = 'block';
+                        video.play();
+                      }
+                      function playVideo6() {
+                        const video = document.getElementById('video6');
+                        const thumbnail = event.target;
+                        thumbnail.style.display = 'none';
+                        video.style.display = 'block';
+                        video.play();
+                      }
+                    </script>
+                    <div class="col-12 col-md-12 masonry-item photography">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-xl-1 col-12 position-absolute position-lg-relative ps-lg-0">
+                <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
+                  <div class="btn-close-boots-container times">
+                    <div class="btn-close-boots"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <!-- end of .container-->
+      </section><!-- <section> close ============================-->
+      <!-- ============================================-->
+
+      
+
+    <!-- ============================================-->
+    <!-- <section> begin STATIC CREATIVES============================-->
+    <section class="p-0 page d-none" id="playable">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-11 col-xl-11 order-1 order-lg-0 pt-5 pt-lg-4 pt-xl-4 pt-xxl-4 pb-0">
+            <div class="row flex-center">
+              <div class="col-lg-10 col-xl-7 pb-5">
+                <div class="text-center mb-5 mb-lg-6">
+                  <h2><span class="fw-medium">Interactive</span> Playables</h2>
+                </div>
+
+                <div class="row g-2 mt-2" id="portfolio-gallery" data-isotope='{"layoutMode":"packery"}'>
+                  <div class="col-12 col-md-4 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="assets/img/holiday.png"
+                        alt="" />
+                      <div class="card-img-overlay">
+                        <div class="px-4 hoverbox-content d-flex flex-column flex-center">
+                          <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#play1"><i
+                              class="fas fa-eye fs-2 text-light"> </i>
+                            <h2 class="text-center">Dive In:</h2>
+                            <h1 class="text-center">Holiday Magic Demo Await</h1>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="assets/img/holiday.png"
+                        alt="" />
+                      <div class="card-img-overlay">
+                        <div class="px-4 hoverbox-content d-flex flex-column flex-center">
+                          <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#play1"><i
+                              class="fas fa-eye fs-2 text-light"> </i>
+                            <h2 class="text-center">Holiday Magic</h2>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-4 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="assets/img/holiday.png"
+                        alt="" />
+                      <div class="card-img-overlay">
+                        <div class="px-4 hoverbox-content d-flex flex-column flex-center">
+                          <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#play1"><i
+                              class="fas fa-eye fs-2 text-light"> </i>
+                            <h2 class="text-center">Holiday Magic</h2>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-md-12 masonry-item photography">
+                  </div>
+
+                  <div class="col-6 col-md-3 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="assets/img/holiday.png"
+                        alt="" />
+                      <div class="card-img-overlay">
+                        <div class="px-4 hoverbox-content d-flex flex-column flex-center">
+                          <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#play1"><i
+                              class="fas fa-eye fs-2 text-light"> </i>
+                            <h2 class="text-center">Holiday Magic</h2>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-md-3 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="assets/img/holiday.png"
+                        alt="" />
+                      <div class="card-img-overlay">
+                        <div class="px-4 hoverbox-content d-flex flex-column flex-center">
+                          <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#modalFullscreen"><i
+                              class="fas fa-eye fs-2 text-light"> </i>
+                            <h2 class="text-center">Holiday Magic</h2>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-md-3 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="assets/img/holiday.png"
+                        alt="" />
+                      <div class="card-img-overlay">
+                        <div class="px-4 hoverbox-content d-flex flex-column flex-center">
+                          <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#modalFullscreen"><i
+                              class="fas fa-eye fs-2 text-light"> </i>
+                            <h2 class="text-center">Holiday Magic</h2>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-6 col-md-3 masonry-item photography">
+                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="assets/img/holiday.png"
+                        alt="" />
+                      <div class="card-img-overlay">
+                        <div class="px-4 hoverbox-content d-flex flex-column flex-center">
+                          <a class="stretched-link" href="#" data-bs-toggle="modal" data-bs-target="#modalFullscreen"><i
+                              class="fas fa-eye fs-2 text-light"> </i>
+                            <h2 class="text-center">Holiday Magic</h2>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="col-lg-1 col-xl-1 col-12 position-absolute position-lg-relative ps-lg-0">
+            <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
+              <div class="btn-close-boots-container times">
+                <div class="btn-close-boots"></div>
+              </div>
+              <!-- <div class="bg-holder sidebar-rounded" style="background-image:url(https://prium.github.io/Boots5/v1.0.0/assets/sidebars/portfolio.png);"></div> -->
+              <!--/.bg-holder-->
+              <div
+                class="position-relative d-lg-flex flex-column justify-content-end align-items-end h-100 px-lg-4 px-xxl-5">
+                <!-- <h1 class="text-white text-vertical px-5 px-lg-0 opacity-50 fs-xl-3 fs-xxl-4">iOPEX Playables</h1> -->
+                <!-- <img class="d-none d-lg-block line-icons mt-5" src="assets/img/home.png" alt="icon" /> -->
+                <!-- <hr class="my-4 w-100 d-none d-lg-block opacity-25" /> -->
+                <!-- <div class="flex-between-center d-none d-lg-flex w-100 opacity-75" data-sidebar-link="page-link"><a class="sidebar-nav btn btn-link text-decoration-none px-1" href="#contact"> <i class="fas fa-chevron-left me-lg-2 me-xl-2 me-xxl-4"></i><span class="text-capitalize">contact</span></a><a class="sidebar-nav btn btn-link text-decoration-none px-1" href="#about"><span class="text-capitalize">about</span><i class="fas fa-chevron-right ms-lg-2 ms-xl-2 ms-xxl-4"></i></a></div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of .container-->
+    </section><!-- <section> close ============================-->
+    <!-- ============================================-->
+
+    <!-- ============================================-->
+    <!-- <section> begin STATIC CREATIVES============================-->
+      <section class="p-0 page d-none" id="animation">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-11 col-xl-11 order-1 order-lg-0 pt-5 pt-lg-4 pt-xl-4 pt-xxl-4 pb-0">
+              <div class="row flex-center">
+                <div class="col-lg-10 col-xl-7 modal-contentt">
+                  <div class="row">
+                    <div class="text-center mb-5 col-9 col-lg-11">
+                      <h2><span class="fw-black">3D</span> Animations</h2>
+                    </div>
+                  </div>                 
+  
+                  <div class="row g-2 pb-4 mb-2" id="portfolio-gallery" data-isotope='{"layoutMode":"packery"}'>
+                     
+                    
+                    <!-- row 1 -->
+                    <div class="col-12 col-md-2 masonry-item photography">
+                      </div>
+                    <div class="col-12 col-md-8 masonry-item photography">
+                      <div class="card hoverbox overflow-hidden">
+                        <img class="img-fluid"
+                             src="assets/img/video_thumb.jpg" alt="Video Thumbnail" onclick="playVideo()">
+                        <video id="video" class="img-fluid videobg" src="https://imediabay.github.io/videos/aimation/IMB_3D.mp4" muted playsinline style="display: none;">
+                          Your browser does not support the video tag.
+                        </video>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-2 masonry-item photography">
+                    </div>
+                    
+                    <script>
+                      function playVideo() {
+                        const video = document.getElementById('video');
+                        const thumbnail = event.target;
+                        thumbnail.style.display = 'none';
+                        video.style.display = 'block';
+                        video.play();
+                      }
+
+                      document.querySelector('.closex').addEventListener('click', function() {
+                        // alert("sfdfd")
+                        const video = document.getElementById('video');
+                        video.pause();
+                        video.currentTime = 0; // Optional: reset video to the beginning
+                        video.style.display = 'none';
+                        document.querySelector('img[alt="Video Thumbnail"]').style.display = 'block';
+                      });
+                      
+                    </script>
+                    
+                   
+                    
+     
+  
+                    
+                    
+                    <div class="col-12 col-md-12 masonry-item photography">
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+            <div class="col-lg-1 col-xl-1 col-12 position-absolute position-lg-relative ps-lg-0">
+              <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
+                <div class="btn-close-boots-container times">
+                  <div class="btn-close-boots"></div>
+                </div>
+              </div>
+            </div>
+            
+  
+            
+          </div>
+        </div>
+        <!-- end of .container-->
+      </section><!-- <section> close ============================-->
+      <!-- ============================================-->
+
+
+
+    <!-- ============================================-->
+    <!-- <section> begin ============================-->
+    <section class="page p-0 d-none" id="five">
+      <div class="container-fluid">
+        <div class="top-0 w-100">
+          <div class="row">
+            <div class="col-lg-8 col-xl-9 order-1 order-lg-0 pt-6 pt-lg-0">
+              <section class="pt-8 pt-xl-7 pt-xxl-8 pb-0">
+                <div class="bg-holder bg-size"
+                  style="background-image:url(assets/img/contact-bg.png);background-position:left center;background-size:auto;">
+                </div>
+                <!--/.bg-holder-->
+                <div class="container-fluid">
+                  <div class="row justify-content-center pb-5">
+                    <div class="col-sm-9 col-lg-6">
+                      <div class="text-center mb-5 mb-lg-6">
+                        <h2><span class="fw-medium">Get In </span>Touch</h2>
+                      </div>
+                      <h4>Connect with us</h4>
+                      <p class="mb-7">Having the shortest possible delay between idea and launch is crucial<br
+                          class="d-none d-xxl-block" />in business. </p>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="icon icon-warning shadow-1"><i class="fas fa-phone fs-1"></i></div>
+                        <div class="flex-1 ms-3">
+                          <p class="fw-bold mb-0 text-gradient-orange-1"><a href="tel:+880124332334">+880124332334</a>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center mb-2">
+                        <div class="icon icon-warning shadow-2"><i class="fas fa-envelope fs-1"></i></div>
+                        <div class="flex-1 ms-3">
+                          <p class="fw-bold mb-0 text-gradient-orange-2"> <a
+                              href="mailto:mail.something@email.com ">mail.something@email.com </a></p>
+                        </div>
+                      </div>
+                      <div class="d-flex align-items-center">
+                        <div class="icon icon-warning fs-2 shadow-3"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="flex-1 ms-3">
+                          <p class="fw-bold text-gradient-orange-3 mb-0">35 King Street Bristol, BS1 4DZ, Perks Heights
+                          </p>
+                        </div>
+                      </div>
+                      <hr class="my-6 text-200" />
+                      <div class="text-center mb-5 mb-lg-6">
+                        <h2 class="mb-5">Follow </h2>
+                        <ul class="list-unstyled list-inline">
+                          <li class="list-inline-item mx-2"><a href="#!"><img src="assets/img/icons/facebook.png"
+                                alt="..." /></a></li>
+                          <li class="list-inline-item mx-2"><a href="#!"><img src="assets/img/icons/twitter.png"
+                                alt="..." /></a></li>
+                          <li class="list-inline-item mx-2"><a href="#!"><img src="assets/img/icons/youtube.png"
+                                alt="..." /></a></li>
+                          <li class="list-inline-item mx-2"><a href="#!"><img src="assets/img/icons/linkdin.png"
+                                alt="..." /></a></li>
+                          <li class="list-inline-item mx-2"><a href="#!"><img src="assets/img/icons/google-plus.png"
+                                alt="..." /></a></li>
+                        </ul>
+                      </div>
+                      <hr class="my-6 text-200" />
+                      <h4>Drop us a line</h4>
+                      <p class="mb-7">Our team are eagerly waiting to help you growing your business. Please feel free
+                        to contact with us.</p>
+                      <form class="row g-4" data-form="data-form" onsubmit="return false"><label
+                          class="form-label text-700" for="inputName"><i class="fas fa-user me-2"></i>NAME</label><input
+                          class="form-control form-boots-control mt-0" id="inputName" type="text" name="name" /><label
+                          class="form-label text-700" for="inputEmail4"> <i class="fas fa-envelope me-2"></i>YOUR
+                          EMAIL</label><input class="form-control form-boots-control mt-0" id="inputEmail4" type="email"
+                          name="email" /><label class="form-label text-700" for="validationTextarea"> <i
+                            class="fas fa-pen me-2"></i>MESSAGE</label><textarea
+                          class="form-control is-invalid border-400 form-boots-control mt-0" id="validationTextarea"
+                          placeholder="Message" rows="6" cols="50" required="required"
+                          name="message"> </textarea><button class="btn btn-boots-warning w-100 mt-5"
+                          type="submit">Send</button>
+                        <div class="feedback"> </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center mt-4 py-3">
+                    <div class="col-12 col-lg-10">
+                      <div class="rounded googlemap min-vh-50" data-gmap="data-gmap"
+                        data-latlng="48.8583701,2.2922873,17" data-scrollwheel="false"
+                        data-icon="assets/img/map-marker.png" data-zoom="17" data-theme="Default">
+                        <div class="marker-content py-3">
+                          <h5>Eiffel Tower</h5>
+                          <p>Gustave Eiffel's iconic, wrought-iron 1889 tower,<br /> with steps and elevators to
+                            observation decks. </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center my-3">
+                    <div class="col-12 col-lg-10">
+                      <div class="card bg-soft-orange-1">
+                        <div class="card-body py-3">
+                          <div class="row">
+                            <div class="col-lg-6 text-center text-lg-start">
+                              <p class="fs--1 my-2 fw-bold text-gradient-orange-soft-1">All rights Reserved &copy; iOPEX
+                                Ltd, 2024</p>
+                            </div>
+                            <div class="col-lg-6 d-lg-flex align-self-center justify-content-end text-center">
+                              <p class="fs--1 mb-0 text-gradient-orange-soft-1">Made with <span
+                                  class="fas fa-heart mx-1 text-warning"></span>by<a href="https://www.iopex.com/">
+                                  iOPEX</a></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="col-lg-4 col-xl-3 col-12 position-absolute position-lg-relative ps-lg-0">
+              <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
+                <div class="btn-close-boots-container times">
+                  <div class="btn-close-boots"></div>
+                </div>
+                <div class="bg-holder sidebar-rounded"
+                  style="background-image:url(https://prium.github.io/Boots5/v1.0.0/assets/sidebars/contact.png);">
+                </div>
+                <!--/.bg-holder-->
+                <div
+                  class="position-relative d-lg-flex flex-column justify-content-end align-items-end h-100 px-lg-4 px-xxl-5">
+                  <h1 class="text-white text-vertical px-5 px-lg-0 opacity-50 fs-xl-3 fs-xxl-4">Contact</h1><img
+                    class="d-none d-lg-block line-icons mt-5" src="assets/img/map-4-2.png" alt="icon" />
+                  <hr class="my-4 w-100 d-none d-lg-block opacity-25" />
+                  <div class="flex-between-center d-none d-lg-flex w-100 opacity-75" data-sidebar-link="page-link"><a
+                      class="sidebar-nav btn btn-link text-decoration-none px-1" href="#services"> <i
+                        class="fas fa-chevron-left me-lg-2 me-xl-2 me-xxl-4"></i><span
+                        class="text-capitalize">services</span></a><a
+                      class="sidebar-nav btn btn-link text-decoration-none px-1" href="#portfolio"><span
+                        class="text-capitalize">portfolio</span><i
+                        class="fas fa-chevron-right ms-lg-2 ms-xl-2 ms-xxl-4"></i></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- end of .container-->
+    </section><!-- <section> close ============================-->
+    <!-- ============================================-->
+
+  </main><!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+
+  <div class="modal fade" id="play1" tabindex="-1" data-bs-keyboard="false" aria-labelledby="modalFullscreen"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="d-flex justify-content-end border-bottom-0 py-5 px-5"><button
+            class="btn-close position-fixed z-index-1" type="button" data-bs-dismiss="modal"
+            aria-label="Close"></button></div>
+
+        <!-- ============================================-->
+        <!-- <section> begin ============================-->
+        <section class="pt-7">
+          <div class="container-fluid">
+            <div class="main-content">
+              <div id="game" class="content-tab active">
+                <div class="tab-content">
+                  <div class="gallery-mobile-demo">
+                    <div class="gallery-mobile-top">
+                      <div class="mobile-mic"></div>
+                    </div>
+                    <div class="if-top">
+                      <img src="assets/img/top.png">
+                    </div>
+                    <div class="gallery-mobile-iframe w-embed w-iframe">
+                      <iframe class="gummi" width="100%" height="593" src="https://cocacolacharitypco.pages.dev/"
+                        frameborder="0" allowfullscreen="">
+                      </iframe>
+                    </div>
+                    <div class="if-footline">
+                      <img src="assets/img/footline.png">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="row justify-content-center pb-5">
+            <div class="col-lg-8 col-xl-7">
+              <div class="row my-5">
+                <h2 class="mb-5 text-start">Share Holiday Magic</h2>
+                <div class="col-lg-6 col-xl-5 text-start">
+                  <h5>Category </h5>
+                  <p>Branding</p>
+                  <h5>Client </h5>
+                  <p>ThemeWagon</p><a class="text-800 text-" href="https://themewagon.com"> <i
+                      class="fas fa-link me-2"></i>https://themewagon.com</a>
+                </div>
+                <div class="col-lg-6 col-xl-7 border-start text-start mt-4 mt-lg-0">
+                  <h5>Brief</h5>
+                  <p>I must explain to you how all this mistaken idea of reprobating pleasure and extolling pain arose.
+                    To do so, I will give you a complete account of the system, and expound the actual teachings of the
+                    great explorer of the truth, the master-builder of human happiness.</p>
+                </div>
+              </div>
+              <div class="mb-6">
+                <p class="my-3 text-start">I must explain to you how all this mistaken idea of reprobating pleasure and
+                  extolling pain arose. To do so, I will give you a complete account of the system, and expound the
+                  actual teachings of the great explorer of the truth, the master-builder of human happiness. No one
+                  rejects, dislikes or avoids pleasure itself, because it is pleasure, but because those who do not know
+                  how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
+                <p class="my-3 text-start">To do so, I will give you a complete account of the system, and expound the
+                  actual teachings of the great explorer of the truth, the master-builder of human happiness.No one
+                  rejects, dislikes or avoids pleasure itself, because it is pleasure, but because those who do not know
+                  how to pursue pleasure rationally encounter consequences that are extremely painful.</p>
+              </div><img class="mb-4 img-fluid"
+                src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-2.png" alt="..." />
+              <h4>Etaoin shrdlu</h4>
+              <div class="mb-6">
+                <p class="my-3 text-start"> Must explain to you how all this mistaken idea of reprobating pleasure and
+                  extolling pain arose. To do so, I will give you a complete account of the system, and expound the
+                  actual teachings of the great explorer of the truth, the master-builder of human happiness.</p>
+                <p class="my-3 text-start">The discovery of the text's origin is attributed to Richard McClintock, a
+                  Latin scholar at Hampden–Sydney College. McClintock connected Lorem ipsum to Cicero's writing sometime
+                  before 1982 while searching for instances of the Latin word consectetur, which was rarely used in
+                  classical literature</p>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 text-center text-lg-start mb-6 mb-lg-0"><img class="img-fluid"
+                    src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-5.png" alt="..." />
+                  <h4 class="mt-3">Etaoin shrdlu</h4>
+                  <p class="px-3 px-lg-0">He rejects pleasures to secure other greater pleasures, or else he endures
+                    pains to avoid worse pains. </p>
+                </div>
+                <div class="col-lg-6 text-center text-lg-start mb-6 mb-lg-0"> <img class="img-fluid"
+                    src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-7.png" alt="..." />
+                  <h4 class="mt-3">Etaoin shrdlu</h4>
+                  <p class="px-3 px-lg-0">The wise man therefore always holds in these matters to this principle of
+                    selection. </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 text-center text-lg-start mb-6 mb-lg-0"><img class="img-fluid"
+                    src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-6.png" alt="..." />
+                </div>
+                <div class="col-lg-6 text-center text-lg-start mb-6 mb-lg-0"> <img class="img-fluid"
+                    src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-8.png" alt="..." />
+                  <h4 class="mt-3">Etaoin shrdlu</h4>
+                  <p class="px-3 px-lg-0">What follows is H. Rackham's translation, as printed in the Loeb Classical
+                    Library edition</p>
+                </div>
+              </div><img class="mb-2 img-fluid"
+                src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-1.png" alt="..." /><img
+                class="mb-2 img-fluid"
+                src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-3.png" alt="..." /><img
+                class="mb-2 img-fluid"
+                src="https://prium.github.io/Boots5/v1.0.0/assets/img/projects/portfolio-modal-4.png" alt="..." />
+              <h4 class="mt-3">Etaoin shrdlu</h4>
+              <p>He rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.
+              </p>
+            </div>
+          </div>
+      </div>
+    </div><!-- end of .container-->
+    </section><!-- <section> close ============================-->
+    <!-- ============================================-->
+  </div>
+  </div>
+  </div>
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+  <!-- ===============================================-->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/anchor.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
