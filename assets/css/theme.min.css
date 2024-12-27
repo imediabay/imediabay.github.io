@@ -7868,6 +7868,13 @@ textarea.form-control-lg {
     font-weight: 500 !important;
     color:#ffffff;
 }
+.fw-medium-black{
+    font-weight: 500 !important;
+    color:#f27024;
+}
+.text-black{
+    color:#000000;
+}
 .fw-black{
     font-weight: 500 !important;
     color:#ffffff;
@@ -18381,4 +18388,7 @@ iframe.yt-video.loaded {
     height: auto;
     max-height: 400px!important;
     background: url("../img/bg.jpg")!important;
+}
+.promt-content{
+
 }
