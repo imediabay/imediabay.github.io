@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ===============================================-->
+  <!--    Document Title-->
+  <!-- ===============================================-->
+  <title>iOPEX Portfolio</title>
+  <!-- <style>
+      .fullscreen-prompt {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-size: 20px;
+        z-index: 999;
+        cursor: pointer;
+      }
+    </style> -->
+
+  <!-- ===============================================-->
+  <!--    Favicons-->
+  <!-- ===============================================-->
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico"> -->
+  <!-- <link rel="manifest" href="assets/img/favicons/manifest.json"> -->
+  <!-- <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png"> -->
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- ===============================================-->
+  <!--    Stylesheets-->
+  <!-- ===============================================-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700;800;900&amp;display=swap"
+    rel="stylesheet">
+  <link href="assets/css/prism.css" rel="stylesheet">
+  <link href="assets/css/theme.min.css" rel="stylesheet" />
+  <link href="assets/css/user.min.css" rel="stylesheet" />
+  <link href="assets/css/swiper-bundle.min.css" rel="stylesheet">
+  <!-- <link href="assets/css/prism.css" rel="stylesheet"> -->
+</head>
+
+<body>
+  <main class="main" id="top">   
+
+    <!-- ============================================-->
+    <!-- <section> begin STATIC CREATIVES============================-->
+      <section class="p-0 " id="">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-11 col-xl-11 order-1 order-lg-0 pt-5 pt-lg-4 pt-xl-4 pt-xxl-4 pb-0">
+              <div class="row flex-center">
+                <div class="col-lg-10 col-xl-7 modal-contentt">
+                    <div class="row">
+                      <div class="text-center mb-5 col-9 col-lg-11">
+                        <h2><span class="fw-black">Motion</span> Graphics</h2>
+                      </div>
+                    </div>    
+                    <div class="row g-2 pb-5 mb-2" id="portfolio-gallery" data-isotope='{"layoutMode":"packery"}'>  
+                      <!-- row 1 -->
+                      <div class="col-12 col-md-2 masonry-item photography"></div>
+                      <div class="col-12 col-md-5 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden">
+                          <img class="img-fluid"
+                               src="assets/img/money.jpg" alt="Video Thumbnail" onclick="playVideo('video1')">
+                          <video id="video1" class="img-fluid" src="https://imediabay.github.io/videos/motion/ANI_NerdWallet.mp4" controls loop playsinline style="display: none;">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-5 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden">
+                          <img class="img-fluid"
+                               src="assets/img/dow.jpg" alt="Video Thumbnail" onclick="playVideo('video2')">
+                          <video id="video2" class="img-fluid" src="https://imediabay.github.io/videos/motion/Email_Widget_2.mp4" controls loop playsinline style="display: none;">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
+                      <!-- Row 2 -->
+                      <div class="col-12 col-md-2 masonry-item photography"></div>
+                      <div class="col-12 col-md-5 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden">
+                          <img class="img-fluid"
+                               src="assets/img/feture.jpg" alt="Video Thumbnail" onclick="playVideo('video3')">
+                          <video id="video3" class="img-fluid" src="https://imediabay.github.io/videos/motion/FeaturesAcq.mp4" controls loop playsinline style="display: none;">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
+                      
+                      <div class="col-12 col-md-5 masonry-item photography">
+                        <div class="card hoverbox overflow-hidden">
+                          <img class="img-fluid"
+                               src="assets/img/ru.jpg" alt="Video Thumbnail" onclick="playVideo('video4')">
+                          <video id="video4" class="img-fluid" src="https://imediabay.github.io/videos/motion/French_Acq.mp4" controls loop playsinline style="display: none;">
+                            Your browser does not support the video tag.
+                          </video>
+                        </div>
+                      </div>
+                      
+                      </div>
+                    
+                    <script>
+                      document.addEventListener("DOMContentLoaded", function() {
+                            function playVideo(videoId) {
+                                const video = document.getElementById(videoId);
+                                const thumbnail = document.querySelector(`img[alt="Video Thumbnail"][onclick="playVideo('${videoId}')"]`);
+
+                                // Pause all other videos
+                                document.querySelectorAll('video').forEach(v => {
+                                if (v.id !== videoId) {
+                                    v.pause();
+                                    v.currentTime = 0;
+                                    v.style.display = 'none';
+                                    document.querySelector(`img[alt="Video Thumbnail"][onclick="playVideo('${v.id}')"]`).style.display = 'block';
+                                }
+                                });
+
+                                thumbnail.style.display = 'none';
+                                video.style.display = 'block';
+                                video.play();
+                            }
+
+                            document.querySelectorAll('img[alt="Video Thumbnail"]').forEach(thumbnail => {
+                                thumbnail.addEventListener('click', function(event) {
+                                const videoId = thumbnail.getAttribute('onclick').match(/'(.*)'/)[1];
+                                playVideo(videoId);
+                                });
+                            });
+
+                            document.querySelector('.closex').addEventListener('click', function() {
+                                document.querySelectorAll('video').forEach(video => {
+                                video.pause();
+                                video.currentTime = 0; // Optional: reset video to the beginning
+                                video.style.display = 'none';
+                                });
+                                document.querySelectorAll('img[alt="Video Thumbnail"]').forEach(thumbnail => {
+                                thumbnail.style.display = 'block';
+                                });
+                            });
+                            });
+
+                    </script>
+                    <!-- row 1 -->
+                    <div class="col-12 col-md-2 masonry-item photography">
+                      </div>
+                      <div class="col-12 col-md-12 masonry-item photography">
+                    </div>
+                  </div>
+               
+  
+              </div>
+            </div>
+            <div class="col-lg-1 col-xl-1 col-12 position-absolute position-lg-relative ps-lg-0">
+              <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
+                <div class="btn-close-boots-container times">
+                  <a href="/"><div class="btn-close-boots"></div></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of .container-->
+      </section><!-- <section> close ============================-->
+      <!-- ============================================-->
+    
+      <!-- ============================================-->
+    <!-- <section> begin ============================-->
+    
+  </div>
+
+  
+
+
+
+  </div>
+  </div>
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+  <!-- ===============================================-->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/anchor.min.js"></script>
+  <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
