@@ -18281,7 +18281,7 @@ iframe.yt-video.loaded {
     font-weight: 700;
     font-size: 17px;
     transition: opacity 900ms;
-    background: linear-gradient(180deg, #0000001f 49%, #000000e3 87%);
+    /* background: linear-gradient(180deg, #0000001f 49%, #000000e3 87%); */
     margin-top: -64.5px;
 }
 .honeycomb-cell__title{
@@ -18328,7 +18328,7 @@ iframe.yt-video.loaded {
 }
  .honeycomb-cell:hover .honeycomb-cell__title {
 	 opacity:1;
-     background: linear-gradient(180deg, #f329551f, rgb(89 90 92));
+     /* background: linear-gradient(180deg, #f329551f, rgb(89 90 92)); */
 }
  .honeycomb-cell:hover::before {
 	 background: #f27024;
