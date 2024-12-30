@@ -521,6 +521,7 @@
     --boots5-btn-disabled-custom-background:  rgba(245,  242,  252,  0.65);
     --boots5-btn-disabled-custom-color:  rgba(28,  28,  28,  0.3);
 }
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 *, *::before, *::after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -723,6 +724,12 @@ thead, tbody, tfoot, tr, td, th {
     border-color: inherit;
     border-style: solid;
     border-width: 0;
+}
+.pixelfont{
+	font-family: "Pixelify Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 }
 label {
     display: inline-block;
