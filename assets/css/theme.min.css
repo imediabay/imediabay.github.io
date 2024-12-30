@@ -728,8 +728,10 @@ thead, tbody, tfoot, tr, td, th {
 .pixelfont{
 	font-family: "Pixelify Sans", serif;
   font-optical-sizing: auto;
-  font-weight: <weight>;
+  font-weight: 1000;
   font-style: normal;
+  font-size: 30px;
+  color: #f27024;
 }
 label {
     display: inline-block;
