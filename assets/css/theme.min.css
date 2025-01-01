@@ -531,6 +531,8 @@
     scroll-behavior: smooth;
 }
 }body {
+    background: #000000;
+    background-color: #000000;
     margin: 0;
     font-family: var(--boots5-body-font-family);
     font-size: var(--boots5-body-font-size);
@@ -6208,7 +6210,7 @@ textarea.form-control-lg {
     flex-direction: column;
     max-width: 100%;
     visibility: hidden;
-    background-color: var(--boots5-modal-content-bg);
+    background-color: #000000;
     background-clip: padding-box;
     outline: 0;
     -webkit-box-shadow: var(--boots5-box-shadow-sm);
@@ -6273,6 +6275,7 @@ textarea.form-control-lg {
     top: 0;
     left: 0;
     width: 400px;
+    background: #000000;
     border-right: 1px solid rgba(0, 0, 0, .2);
     -webkit-transform: translateX(-100%);
     -ms-transform: translateX(-100%);
@@ -7947,6 +7950,10 @@ textarea.form-control-lg {
     font-weight: 500 !important;
     color:#f27024;
 }
+.fw-medium-blackk{
+    font-weight: 500 !important;
+    color:#f27024;
+}
 .text-black{
     color:#000000;
 }
@@ -8456,6 +8463,7 @@ textarea.form-control-lg {
         display: flex;
         flex-direction: row-reverse;
     }
+    
     .title{
         display: block;
     }
@@ -17640,6 +17648,7 @@ textarea.form-control:active, textarea.form-control:focus {
 }
 .home-nav.show, .home-content.show {
     /* position: unset; */
+    background-color: #000000;
     background: url('https://imediabay.github.io/assets/img/bg.jpg');
     background-repeat:no-repeat ;
     background-size: cover;
@@ -18180,6 +18189,18 @@ iframe.yt-video.loaded {
     }
     .content-tab {
     /* display: none; */
+    /* scale: 90%; */
+    }
+    .steps img{
+        width: 25px;
+        height: 30px;
+    }
+    .steps{
+        font-size: 21px;
+        display: flex;
+    }
+    .play-title h2{
+        color:#f27024;
     }
     .content-tab.active {
     display: block;
@@ -18191,25 +18212,25 @@ iframe.yt-video.loaded {
         -webkit-backdrop-filter: saturate(200%) blur(200px);
         backdrop-filter: saturate(200%) blur(200px);
         background-color: #002a3a33;
-        border-radius: 49px;
+        border-radius: 22px;
         flex-direction: column;
         padding: 0 10px 10px;
         display: flex;
         position: relative;
         overflow: hidden;
-        width: 314px;
-        height: 621px;
+        width: 273px;
+    height: 536px;
         background: url(https://imediabay.github.io/assets/img/iphone.png);
         background-size: cover;
-        box-shadow: 3px 6px 9px 0px #ebebeb;
+        /* box-shadow: 3px 6px 9px 0px #ebebeb; */
     }
     .if-top {
     position: absolute;
-    top: 21px;
-    left: 27px;
+    top: 13px;
+    left: 22px;
     }
     .if-top img{
-    width:253px;
+    width:224px;
     }
     .if-footline {
     position:absolute;
@@ -18217,13 +18238,13 @@ iframe.yt-video.loaded {
     left:27px;
     }
     .if-footline img {
-    width:253px;
+    width:224px;
     }
     .gallery-mobile-top {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 16px;
+    height: 13.3px;
     display: flex;
     }
     .mobile-mic {
@@ -18264,10 +18285,10 @@ iframe.yt-video.loaded {
     }
     .gallery-mobile-iframe {
     border: 2px solid var(--gumgum-light-gray);
-    background-color: #fff;
-    border-radius: 29px;
-    width: 282px;
-    height: 590px;
+    background-color: #2d2d2d;
+    border-radius: 28px;
+    width: 238.6px;
+    height: 507px;
     overflow: hidden;
     margin: 0 auto;
     }
@@ -18424,10 +18445,19 @@ iframe.yt-video.loaded {
 	 width: 250px;
 	 margin: 0 12.5px;
 }
+.text-orange{
+    color:#f27024;
+}
  @media (max-width: 550px) {
 	 .honeycomb-cell {
 		 margin: 81.25px 25px;
 	}
+    .fw-medium-black{
+        font-size: 17px;
+    }
+    .play-title h2{
+        font-size: 24px ;
+    }
 }
  @media (min-width: 550px) and (max-width: 825px) {
 	 .honeycomb-cell:nth-child(3n) {
