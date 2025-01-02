@@ -33,50 +33,8 @@
 </head>
 
 <body>
-  <!-- <button class="fullscreen-button">Go full screen for a better experience.</button> -->
-  <!-- <div id="fullscreen-prompt"></div> -->
-
-  <!-- <script>
-      document.addEventListener("DOMContentLoaded", function() {
-      const elem = document.documentElement;
-    
-      function requestFullscreen() {
-        if (elem.requestFullscreen) {
-          elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) { 
-          elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) { 
-          elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { 
-          elem.msRequestFullscreen();
-        }
-      }
-    
-      function isDesktop() {
-        return window.innerWidth > 1000; 
-      }
-    
-      if (isDesktop()) {
-        ['mouseover', 'mouseenter', 'focus', 'click'].forEach(event => {
-          document.body.addEventListener(event, requestFullscreen);
-        });
-      }
-    });
-
-    </script> -->
-  <!-- ===============================================-->
-  <!--    Main Content-->
-  <!-- ===============================================-->
   <main class="main" id="top">
 
-
-    <!-- ============================================-->
-    <!-- Preloader ==================================-->
-    <!-- <div class="preloader" id="preloader"> -->
-    <!-- <div class="loader"><span> </span><span></span><span></span><span></span><span> </span></div> -->
-    <!-- </div> -->
-    <!-- ============================================-->
-    <!-- End of Preloader ===========================-->
     <div class="offcanvas offcanvas-start home-content show" id="offcanvasStart" tabindex="-1" data-bs-backdrop="false"
       data-bs-scroll="true" data-base-content="home">
 
@@ -91,32 +49,32 @@
         <div class="title mb-0 mb-md-4">Got a <span class="pixelfont">pixel</span> task? We’ve got you covered!</div>
         <ul class="honeycomb" lang="es">
           <li class="honeycomb-cell">
-            <a href="#static_creatives">
+            <a href="#static_creatives" id="staticCreatives">
               <img class="honeycomb-cell__image" src="https://imediabay.github.io/assets/img/creative.jpg">
               <div class="honeycomb-cell__title"></div>
             </a>
             <!-- <div class="honeycomb-cell__title">Static Creatives</div> -->
           </li>
           <li class="honeycomb-cell">
-            <a href="#add_copy">
+            <a href="#add_copy" id="adCopy">
               <img class="honeycomb-cell__image" src="https://imediabay.github.io/assets/img/ad.jpg">
               <div class="honeycomb-cell__title"></div>
             </a>
           </li>
           <li class="honeycomb-cell">
-            <a href="motiongraphics.html">
+            <a href="motiongraphics.html" id="motionGraphics">
               <img class="honeycomb-cell__image" src="https://imediabay.github.io/assets/img/gip.jpg">
               <div class="honeycomb-cell__title"></div>
             </a>
           </li>
           <li class="honeycomb-cell">
-            <a href="3danimation.html">
+            <a href="3danimation.html" id="3dAnimations">
               <img class="honeycomb-cell__image" src="https://imediabay.github.io/assets/img/anim.jpg">
               <div class="honeycomb-cell__title"></div>
             </a>
           </li>
           <li class="honeycomb-cell">
-            <a href="#playable">
+            <a href="#playable" id="playables">
               <img class="honeycomb-cell__image" src="https://imediabay.github.io/assets/img/game.jpg">
               <div class="honeycomb-cell__title"></div>
             </a>
@@ -639,11 +597,11 @@
                     </div>
                     <div class="row">                    
                     <div class="col-12 col-md-4 masonry-item photography">
-                      <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/holiday.png"
+                      <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/holiday.png"
                           alt="" />
                         <div class="card-img-overlay">
                           <div class="px-4 hoverbox-content d-flex flex-column flex-center">
-                            <a class="stretched-link" href="cocacola.html"><i
+                            <a class="stretched-link" href="cocacola.html" id="cocacolaPlayable"><i
                                 class="fas fa-eye fs-2 text-light"> </i>
                               <!-- <h3 class="text-center">Click Here</h3> -->
                               <h4 class="text-center">Click here to try out the playable.</h4>
@@ -653,10 +611,10 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-4 masonry-item photography">
-                      <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/7.png" alt="" />
+                      <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/7.png" alt="" />
                         <div class="card-img-overlay">
                           <div class="px-4 hoverbox-content d-flex flex-column flex-center">
-                            <a class="stretched-link" href="toyota.html"><i
+                            <a class="stretched-link" href="toyota.html" id="toyotaPlayable"><i
                                 class="fas fa-eye fs-2 text-light"> </i>
                                 <h4 class="text-center">Click here to try out the playable.</h4>
                             </a>
@@ -665,10 +623,10 @@
                       </div>
                     </div>
                     <div class="col-12 col-md-4 masonry-item photography">
-                      <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/2.png" alt="" />
+                      <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/2.png" alt="" />
                         <div class="card-img-overlay">
                           <div class="px-4 hoverbox-content d-flex flex-column flex-center">
-                            <a class="stretched-link" href="fanta.html"><i
+                            <a class="stretched-link" href="fanta.html" id="fantaPlayable"><i
                                 class="fas fa-eye fs-2 text-light"> </i>
                                 <h4 class="text-center">Click here to try out the playable.</h4>
                             </a>
@@ -685,51 +643,47 @@
                     <h3><span class="fw-medium">Our portfolio includes a wide array of playable Ads to choose from</h3>
                   </div>
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/1.png" alt="" />
+                    <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/1.png" alt="" />
                     </div>
                   </div>
 
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/wallmart.png"
+                    <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/wallmart.png"
                         alt="" />
                     </div>
                   </div>
 
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/3.png" alt="" />
+                    <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/3.png" alt="" />
                     </div>
                   </div>
 
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/4.png" alt="" />
+                    <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/4.png" alt="" />
                     </div>
                   </div>
 
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/5.png" alt="" />
+                    <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/5.png" alt="" />
                     </div>
                   </div>
 
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/6.png" alt="" />
+                    <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/6.png" alt="" />
                     </div>
                   </div>
 
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/candy.png"
+                    <div class=" hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/candy.png"
                         alt="" />
                     </div>
                   </div>
-
                   <div class="col-6 col-md-3 masonry-item photography">
-                    <div class="card hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/8.png" alt="" />
+                    <div class="hoverbox overflow-hidden"><img class="img-fluid" src="https://imediabay.github.io/assets/img/8.png" alt="">
                     </div>
                   </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
+                  </div>
+                  </div>
 
           <div class="col-lg-1 col-xl-1 col-12 position-absolute position-lg-relative ps-lg-0">
             <div class="sticky-top py-4 sticky-area" data-sidebar-close="sidebar-close">
@@ -738,8 +692,7 @@
               </div>
               <!-- <div class="bg-holder sidebar-rounded" style="background-image:url(https://prium.github.io/Boots5/v1.0.0/assets/sidebars/portfolio.png);"></div> -->
               <!--/.bg-holder-->
-              <div
-                class="position-relative d-lg-flex flex-column justify-content-end align-items-end h-100 px-lg-4 px-xxl-5">
+              <div class="position-relative d-lg-flex flex-column justify-content-end align-items-end h-100 px-lg-4 px-xxl-5">
                 <!-- <h1 class="text-white text-vertical px-5 px-lg-0 opacity-50 fs-xl-3 fs-xxl-4">iOPEX Playables</h1> -->
                 <!-- <img class="d-none d-lg-block line-icons mt-5" src="https://imediabay.github.io/assets/img/home.png" alt="icon" /> -->
                 <!-- <hr class="my-4 w-100 d-none d-lg-block opacity-25" /> -->
