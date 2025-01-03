@@ -940,7 +940,7 @@ progress {
 .img-fluid {
     max-width: 100%;
     height: auto;
-    background: #000000;
+    /* background: #000000; */
 }
 .img-thumbnail {
     padding: .25rem;
@@ -4907,7 +4907,7 @@ textarea.form-control-lg {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: var(--boots5-card-bg);
+    background-color: var(--boots5-card-bg); 
     background-clip: border-box;
     border: 1px solid var(--boots5-card-border-color);
     border-radius: .5rem;
@@ -16053,7 +16053,7 @@ ol, ul {
     top: 2rem;
 }
 .card {
-    border-radius: 1rem;
+    /* border-radius: 36px; */
     border: 0;
 }
 .card-link {
@@ -18196,8 +18196,13 @@ iframe.yt-video.loaded {
         height: 30px;
     }
     .steps{
-        font-size: 21px;
+        font-size: 16px;
         display: flex;
+    }
+    .brief h5{
+        font-size: 28.432px;
+        font-weight: 500 !important;
+    color: #f27024!important;
     }
     .play-title h2{
         color:#f27024;
@@ -18219,14 +18224,14 @@ iframe.yt-video.loaded {
         position: relative;
         overflow: hidden;
         width: 273px;
-    height: 536px;
-        background: url(https://imediabay.github.io/assets/img/iphone.png);
+    height: 543px;
+        background: url(../../iphone.png);
         background-size: cover;
         /* box-shadow: 3px 6px 9px 0px #ebebeb; */
     }
     .if-top {
     position: absolute;
-    top: 13px;
+    top: 23px;
     left: 22px;
     }
     .if-top img{
@@ -18244,7 +18249,7 @@ iframe.yt-video.loaded {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 13.3px;
+    height: 19px;
     display: flex;
     }
     .mobile-mic {
@@ -18287,7 +18292,7 @@ iframe.yt-video.loaded {
     border: 2px solid var(--gumgum-light-gray);
     background-color: #2d2d2d;
     border-radius: 28px;
-    width: 238.6px;
+    width: 233px;
     height: 507px;
     overflow: hidden;
     margin: 0 auto;
