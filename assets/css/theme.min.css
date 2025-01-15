@@ -18331,6 +18331,9 @@ iframe.yt-video.loaded {
 	 padding: 0;
 	 transform: translateY(34.375px);
 }
+.tools-img{
+    width: 1024px;
+}
 @media (max-width:1023px){
     .honeycomb{
         max-width: 100%!important;
@@ -18351,10 +18354,10 @@ iframe.yt-video.loaded {
     flex-grow: 0;
     flex-shrink: 1;
     /* flex-basis: 230px; */
-    flex-basis: 157px;
+    flex-basis: 145px;
     /* max-width: 250px; */
     /* height: 130.5px; */
-    height: 83.5px;
+    height: 74.5px;
     margin: 44px 14px 45px;
     position: relative;
     /* padding: 0.5em; */
