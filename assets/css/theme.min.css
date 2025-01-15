@@ -18464,8 +18464,8 @@ iframe.yt-video.loaded {
  @media (max-width: 550px) {
 	 .honeycomb-cell {
         height: 64.5px;
-		 margin: 43px 7px 35px;
-         flex-basis: 134px;
+        margin: 47px auto 36px;
+        flex-basis: 128px;
 
 	}
     .fw-medium-black{
