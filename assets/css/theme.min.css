@@ -7276,7 +7276,7 @@ textarea.form-control-lg {
     flex-direction: column-reverse;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 4% 0px;
+    padding: 20px 2% 0px;
 }
 @media (max-width: 959px) {
     .text-vertical{
@@ -18331,9 +18331,6 @@ iframe.yt-video.loaded {
 	 padding: 0;
 	 transform: translateY(34.375px);
 }
-.tools-img{
-    width: 1024px;
-}
 @media (max-width:1023px){
     .honeycomb{
         max-width: 100%!important;
@@ -18353,11 +18350,9 @@ iframe.yt-video.loaded {
     flex: 0 1 183px;
     flex-grow: 0;
     flex-shrink: 1;
-    /* flex-basis: 230px; */
-    flex-basis: 145px;
+    flex-basis: 230px;
     /* max-width: 250px; */
-    /* height: 130.5px; */
-    height: 74.5px;
+    height: 130.5px;
     margin: 44px 14px 45px;
     position: relative;
     /* padding: 0.5em; */
@@ -18463,10 +18458,7 @@ iframe.yt-video.loaded {
 }
  @media (max-width: 550px) {
 	 .honeycomb-cell {
-        height: 64.5px;
-        margin: 47px auto 36px;
-        flex-basis: 128px;
-
+		 margin: 81.25px 25px;
 	}
     .fw-medium-black{
         font-size: 17px;
