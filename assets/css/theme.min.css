@@ -24099,6 +24099,12 @@ iframe.yt-video.loaded {
 
 .page {
     min-height: 100vh;
+    background: url(https://imediabay.github.io/assets/img/bg.jpg);
+    background-size: 100%;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    background-position: center;
+    z-index: 1102;
 }
 
 .videobg {
