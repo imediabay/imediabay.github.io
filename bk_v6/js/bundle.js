@@ -13191,11 +13191,12 @@ webpackJsonp([0], [
                     });
                     this.btnTxt.anchor.set(.5);
                     this.frameGrp.addChild(this.btnTxt);
-
+                    window.open("ubereats://chain/browse?chainName=burger-king", "_blank");
+                    
                     this.playagainTxt.inputEnabled = true;
                     this.playagainTxt.events.onInputDown.add(() => {
-                        // this.onClick();
-                        window.open("ubereats://chain/browse?chainName=burger-king", "_blank");
+                        this.onClick();
+                        
                     });
 
                     this.btn.inputEnabled = true;
