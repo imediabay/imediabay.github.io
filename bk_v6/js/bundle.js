@@ -13189,10 +13189,15 @@ webpackJsonp([0], [
                         fontSize: 35,
                         fill: "#ffffff"
                     });
+                    this.btnTxt.inputEnabled = true;
+                    this.btnTxt.events.onInputDown.add(() => {
+                        window.open("ubereats://chain/browse?chainName=burger-king", "_blank");
+                    });
+
                     this.btnTxt.anchor.set(.5);
                     this.frameGrp.addChild(this.btnTxt);
-                    window.open("ubereats://chain/browse?chainName=burger-king", "_blank");
-                    
+                    // window.open("ubereats://chain/browse?chainName=burger-king", "_blank");
+
                     this.playagainTxt.inputEnabled = true;
                     this.playagainTxt.events.onInputDown.add(() => {
                         this.onClick();
