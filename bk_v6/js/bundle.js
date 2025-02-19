@@ -14252,10 +14252,9 @@ webpackJsonp([0], [
                 "ctaText6": "Click below to claim your free\nWhopper® with the purchase of\na Whopper® via Uber Eats.",
                 "ctaText3": "BUN-BELIEVABLY\nCLOSE",
                 "ctaText4": "You still earned a Whopper®\nBOGO. Click below to claim your\nfree Whopper® with the purchase\nof a Whopper® via Uber Eats.",
-                "ctaText5": "Play again",
                 "btnText": "CLAIM BOGO",
-
-            }]
+                "ctaText5": "Play again"
+                }]
         });
 
 
