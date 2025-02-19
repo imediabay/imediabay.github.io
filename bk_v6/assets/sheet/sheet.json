@@ -1,0 +1,140 @@
+{"frames": [
+
+{
+	"filename": "1",
+	"frame": {"x":818,"y":389,"w":113,"h":106},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":106},
+	"sourceSize": {"w":113,"h":106}
+},
+{
+	"filename": "2",
+	"frame": {"x":824,"y":498,"w":113,"h":106},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":106},
+	"sourceSize": {"w":113,"h":106}
+},
+{
+	"filename": "3",
+	"frame": {"x":824,"y":607,"w":113,"h":106},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":106},
+	"sourceSize": {"w":113,"h":106}
+},
+{
+	"filename": "ball shadow",
+	"frame": {"x":2,"y":841,"w":428,"h":72},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":15,"y":2,"w":428,"h":72},
+	"sourceSize": {"w":456,"h":76}
+},
+{
+	"filename": "Basket ball post",
+	"frame": {"x":2,"y":2,"w":376,"h":581},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":376,"h":581},
+	"sourceSize": {"w":376,"h":581}
+},
+{
+	"filename": "Basketball",
+	"frame": {"x":433,"y":841,"w":100,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":100},
+	"sourceSize": {"w":100,"h":100}
+},
+{
+	"filename": "btn",
+	"frame": {"x":2,"y":586,"w":617,"h":169},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":617,"h":169},
+	"sourceSize": {"w":617,"h":169}
+},
+{
+	"filename": "btn_how to play",
+	"frame": {"x":2,"y":758,"w":728,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":728,"h":73},
+	"sourceSize": {"w":728,"h":73}
+},
+{
+	"filename": "Front_Basketball hoop",
+	"frame": {"x":536,"y":841,"w":95,"h":89},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":95,"h":89},
+	"sourceSize": {"w":95,"h":89}
+},
+{
+	"filename": "hoop line",
+	"frame": {"x":381,"y":2,"w":434,"h":510},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":434,"h":510},
+	"sourceSize": {"w":434,"h":510}
+},
+{
+	"filename": "hoop_logo",
+	"frame": {"x":818,"y":2,"w":63,"h":249},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":249},
+	"sourceSize": {"w":63,"h":249}
+},
+{
+	"filename": "instruction_logo",
+	"frame": {"x":733,"y":716,"w":187,"h":196},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":187,"h":196},
+	"sourceSize": {"w":187,"h":196}
+},
+{
+	"filename": "line 02",
+	"frame": {"x":2,"y":834,"w":720,"h":4},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":4},
+	"sourceSize": {"w":720,"h":4}
+},
+{
+	"filename": "Logo",
+	"frame": {"x":818,"y":254,"w":130,"h":132},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":130,"h":132},
+	"sourceSize": {"w":130,"h":132}
+},
+{
+	"filename": "Power_meeter",
+	"frame": {"x":622,"y":515,"w":199,"h":194},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":199,"h":194},
+	"sourceSize": {"w":199,"h":194}
+},
+{
+	"filename": "Score board_Line",
+	"frame": {"x":884,"y":2,"w":5,"h":118},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":5,"h":118},
+	"sourceSize": {"w":5,"h":118}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sheet.png",
+	"format": "RGBA8888",
+	"size": {"w":950,"h":943},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:31b3c3346f183ceb21d4bcd017dbc008:97143af9d6a8d3b6e08d690f37171504:9c44ecd7e9a522007eaff2949095bc1d$"
+}
+}
