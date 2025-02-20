@@ -16,6 +16,12 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .message {
+            font-size: 18px;
+            color: green;
+            font-weight: bold;
+            display: none; /* Hide the message initially */
+        }
     </style>
 </head>
 <body>
@@ -24,23 +30,44 @@
     <button class="button" onclick="shareViaMessageApp()">Share via Message App</button>
     <button class="button" onclick="shareViaWhatsApp()">Share via WhatsApp</button>
 
+    <!-- Success Message -->
+    <div class="message" id="discountMessage">Congratulations! You've earned a 25% discount with code: <strong>25OFF</strong></div>
+
     <script>
+        let sharesCount = 0; // Track the number of shares
+
         function shareViaMessageApp() {
+            // Send share message via SMS
             var message = "Check out this amazing discount!";
             var url = "sms:?&body=" + encodeURIComponent(message);
             window.location.href = url;
+
+            // Increase share count
+            increaseShareCount();
         }
 
         function shareViaWhatsApp() {
+            // Send share message via WhatsApp
             var message = "Check out this amazing discount!";
             var url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
             window.location.href = url;
+
+            // Increase share count
+            increaseShareCount();
         }
 
-        // Function to validate if the user has shared with at least two people
-        function validateSharing() {
-            // Implement your validation logic here
-            // Example: Track clicks and ensure two unique shares
+        function increaseShareCount() {
+            sharesCount++;
+
+            // Validate that at least two shares were made
+            if (sharesCount >= 2) {
+                showDiscountMessage();
+            }
+        }
+
+        function showDiscountMessage() {
+            // Display success message after 2 shares
+            document.getElementById("discountMessage").style.display = "block";
         }
     </script>
 </body>
