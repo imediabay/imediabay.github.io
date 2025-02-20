@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .button {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Discount Page!</h1>
+    <p>Share with at least two people to get a discount.</p>
+    <button class="button" onclick="shareViaMessageApp()">Share via Message App</button>
+    <button class="button" onclick="shareViaWhatsApp()">Share via WhatsApp</button>
+
+    <script>
+        function shareViaMessageApp() {
+            var message = "Check out this amazing discount!";
+            var url = "sms:?&body=" + encodeURIComponent(message);
+            window.location.href = url;
+        }
+
+        function shareViaWhatsApp() {
+            var message = "Check out this amazing discount!";
+            var url = "https://api.whatsapp.com/send?text=" + encodeURIComponent(message);
+            window.location.href = url;
+        }
+
+        // Function to validate if the user has shared with at least two people
+        function validateSharing() {
+            // Implement your validation logic here
+            // Example: Track clicks and ensure two unique shares
+        }
+    </script>
+</body>
+</html>
