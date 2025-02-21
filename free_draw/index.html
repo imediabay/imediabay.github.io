@@ -84,11 +84,6 @@
 
   <br />
 
-  <!-- Button to download the image -->
-  <button id="download-btn">Download Image</button>
-
-  <br />
-
   <!-- Share Button for WhatsApp -->
   <button id="share-btn">Share on WhatsApp</button>
 
@@ -164,95 +159,88 @@
       updateCanvas();
     });
 
-    // Mobile touch support
-    canvas.addEventListener("touchstart", function (e) {
+    // Start drawing
+    function startDrawing(x, y) {
+      isDrawing = true;
+      lastX = x;
+      lastY = y;
+    }
+
+    // Draw on the canvas
+    function draw(x, y) {
+      if (isDrawing) {
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+        lastX = x;
+        lastY = y;
+      }
+    }
+
+    // Stop drawing
+    function stopDrawing() {
+      isDrawing = false;
+    }
+
+    // Ensure drawing happens within the box
+    function withinDrawArea(x, y) {
+      const startX = (canvas.width / 2 - drawWidth / 2);
+      const startY = (canvas.height / 2 - drawHeight / 2);
+      return x >= startX && x <= startX + drawWidth && y >= startY && y <= startY + drawHeight;
+    }
+
+    // Event listeners for drawing (mobile & mouse)
+    canvas.addEventListener("touchstart", function(e) {
       e.preventDefault(); // Prevent default touch behavior (scrolling, etc.)
-      if (isDrawing) {
-        const touch = e.touches[0];
-        const x = touch.clientX - canvas.offsetLeft;
-        const y = touch.clientY - canvas.offsetTop;
-        // Ensure the drawing is within the allowed region (5x7 cm area)
-        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
-            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
-          isDrawing = true;
-          lastX = x;
-          lastY = y;
-        }
+      const touch = e.touches[0];
+      const x = touch.clientX - canvas.offsetLeft;
+      const y = touch.clientY - canvas.offsetTop;
+      if (withinDrawArea(x, y)) {
+        startDrawing(x, y);
       }
     });
 
-    canvas.addEventListener("touchmove", function (e) {
-      e.preventDefault(); // Prevent default touch behavior
-      if (isDrawing) {
-        const touch = e.touches[0];
-        const x = touch.clientX - canvas.offsetLeft;
-        const y = touch.clientY - canvas.offsetTop;
-        // Ensure drawing within the allowed region
-        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
-            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
-          ctx.beginPath();
-          ctx.moveTo(lastX, lastY);
-          ctx.lineTo(x, y);
-          ctx.stroke();
-          lastX = x;
-          lastY = y;
-        }
+    canvas.addEventListener("touchmove", function(e) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const x = touch.clientX - canvas.offsetLeft;
+      const y = touch.clientY - canvas.offsetTop;
+      if (withinDrawArea(x, y)) {
+        draw(x, y);
       }
     });
 
-    canvas.addEventListener("touchend", function () {
-      isDrawing = false;
+    canvas.addEventListener("touchend", function() {
+      stopDrawing();
     });
 
-    // Mouse events for non-touch devices (desktops)
-    canvas.addEventListener("mousedown", function (e) {
+    canvas.addEventListener("mousedown", function(e) {
+      const x = e.clientX - canvas.offsetLeft;
+      const y = e.clientY - canvas.offsetTop;
+      if (withinDrawArea(x, y)) {
+        startDrawing(x, y);
+      }
+    });
+
+    canvas.addEventListener("mousemove", function(e) {
       if (isDrawing) {
         const x = e.clientX - canvas.offsetLeft;
         const y = e.clientY - canvas.offsetTop;
-        // Ensure the drawing is within the allowed region (5x7 cm area)
-        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
-            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
-          isDrawing = true;
-          lastX = x;
-          lastY = y;
+        if (withinDrawArea(x, y)) {
+          draw(x, y);
         }
       }
     });
 
-    canvas.addEventListener("mousemove", function (e) {
-      if (isDrawing) {
-        const x = e.clientX - canvas.offsetLeft;
-        const y = e.clientY - canvas.offsetTop;
-        // Ensure drawing within the allowed region
-        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
-            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
-          ctx.beginPath();
-          ctx.moveTo(lastX, lastY);
-          ctx.lineTo(x, y);
-          ctx.stroke();
-          lastX = x;
-          lastY = y;
-        }
-      }
-    });
-
-    canvas.addEventListener("mouseup", function () {
-      isDrawing = false;
-    });
-
-    // Event listener to download the final image
-    document.getElementById("download-btn").addEventListener("click", function () {
-      const finalImage = canvas.toDataURL("image/png");
-      const a = document.createElement("a");
-      a.href = finalImage;
-      a.download = "final_image.png";
-      a.click();
+    canvas.addEventListener("mouseup", function() {
+      stopDrawing();
     });
 
     // Function to generate WhatsApp sharing URL with image and promo text
-    document.getElementById("share-btn").addEventListener("click", function () {
+    document.getElementById("share-btn").addEventListener("click", function() {
       const finalImage = canvas.toDataURL("image/png");
-      const shareUrl = `https://api.whatsapp.com/send?text=Check%20out%20my%20drawing%20and%20promotion!%20${promoLink}%20${finalImage}`;
+      const shareUrl = `https://api.whatsapp.com/send?text=Check%20out%20my%20drawing%20and%20promotion!%20${promoLink}`;
       window.open(shareUrl, "_blank");
     });
 
