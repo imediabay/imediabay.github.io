@@ -24,10 +24,10 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 75.6px;  /* 2 cm in pixels */
-      height: 151.2px; /* 4 cm in pixels */
-      margin-left: -37.8px; /* Half the width */
-      margin-top: -75.6px;  /* Half the height */
+      width: 188.975px;  /* 5 cm in pixels */
+      height: 264.565px; /* 7 cm in pixels */
+      margin-left: -94.4875px; /* Half the width */
+      margin-top: -132.2825px;  /* Half the height */
       pointer-events: none;  /* Just for visual reference */
     }
     /* Mobile specific styles */
@@ -97,8 +97,8 @@
     let isDrawing = false;
     let drawingEnabled = false;
     let lastX = 0, lastY = 0;
-    const drawWidth = 75.6;  // 2 cm in pixels
-    const drawHeight = 151.2; // 4 cm in pixels
+    const drawWidth = 188.975;  // 5 cm in pixels
+    const drawHeight = 264.565; // 7 cm in pixels
 
     // Promotional text and link
     const promoText = "Check out our amazing promotion!";
@@ -144,9 +144,9 @@
     // Mouse events to draw freehand within the restricted area
     canvas.addEventListener("mousedown", function (e) {
       if (drawingEnabled) {
-        const x = e.offsetX;
-        const y = e.offsetY;
-        // Ensure the drawing is within the allowed region (2x4 cm area)
+        const x = e.clientX - canvas.offsetLeft;
+        const y = e.clientY - canvas.offsetTop;
+        // Ensure the drawing is within the allowed region (5x7 cm area)
         if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
             y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
           isDrawing = true;
@@ -158,8 +158,8 @@
 
     canvas.addEventListener("mousemove", function (e) {
       if (isDrawing && drawingEnabled) {
-        const x = e.offsetX;
-        const y = e.offsetY;
+        const x = e.clientX - canvas.offsetLeft;
+        const y = e.clientY - canvas.offsetTop;
         // Ensure drawing within the allowed region
         if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
             y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
