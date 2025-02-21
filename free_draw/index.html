@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draw, Add Text, and Share Image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    canvas {
+      border: 1px solid #000;
+      margin-top: 20px;
+      background-color: #f2f2f2;
+    }
+    #download-btn, #copy-html-btn {
+      display: none;
+      margin-top: 20px;
+    }
+    #draw-area {
+      border: 2px dashed red;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 75.6px;  /* 2 cm in pixels */
+      height: 151.2px; /* 4 cm in pixels */
+      margin-left: -37.8px; /* Half the width */
+      margin-top: -75.6px;  /* Half the height */
+      pointer-events: none;  /* Just for visual reference */
+    }
+    /* Mobile specific styles */
+    @media (min-width: 768px) {
+      body {
+        display: none;
+      }
+      #mobile-warning {
+        display: block;
+      }
+    }
+    #mobile-warning {
+      display: none;
+      font-size: 18px;
+      color: red;
+      padding: 20px;
+      background-color: #ffcccb;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Draw, Add Text, and Share Image</h1>
+
+  <!-- Mobile/tablet only message -->
+  <div id="mobile-warning">
+    This application is only available on mobile and tablet devices.
+  </div>
+
+  <!-- Button to toggle freehand drawing mode -->
+  <button id="toggle-drawing-btn">Start Drawing</button>
+
+  <br />
+
+  <!-- Canvas for drawing -->
+  <canvas id="canvas"></canvas>
+
+  <br />
+  
+  <!-- Button to download the image -->
+  <button id="download-btn">Download Image</button>
+
+  <!-- Button to copy HTML with image and link -->
+  <button id="copy-html-btn">Copy HTML to Share</button>
+
+  <div id="draw-area"></div>
+
+  <script>
+    // Check if the user is on a mobile or tablet device
+    function isMobileOrTablet() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      // Regex for detecting mobile or tablet devices
+      return /android/i.test(userAgent) || /iphone|ipod/i.test(userAgent) || /ipad/i.test(userAgent);
+    }
+
+    // If not mobile/tablet, show a message and hide the rest of the interface
+    if (!isMobileOrTablet()) {
+      document.body.innerHTML = '<div style="text-align: center; margin-top: 50px;">This application is only available on mobile and tablet devices.</div>';
+    }
+
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    const drawArea = document.getElementById("draw-area");
+    let backgroundImage = new Image();
+    let isDrawing = false;
+    let drawingEnabled = false;
+    let lastX = 0, lastY = 0;
+    const drawWidth = 75.6;  // 2 cm in pixels
+    const drawHeight = 151.2; // 4 cm in pixels
+
+    // Promotional text and link
+    const promoText = "Check out our amazing promotion!";
+    const promoLink = "https://www.example.com";
+
+    // Set the background image (static image)
+    backgroundImage.src = "img.webp";  // Your preloaded image path here
+
+    // Once the background image is loaded, update the canvas
+    backgroundImage.onload = function() {
+      updateCanvas();
+    };
+
+    // Set canvas size to larger dimensions for easier drawing
+    canvas.width = 360;  // Increased width for better space
+    canvas.height = 550; // Keeping the same height as the background image
+
+    // Update the canvas with the background image
+    function updateCanvas() {
+      if (backgroundImage) {
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Draw static background
+      }
+      if (drawingEnabled) {
+        ctx.strokeStyle = 'red'; // Drawing color
+        ctx.lineWidth = 5; // Drawing thickness
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+      }
+    }
+
+    // Event listener for drawing mode toggle
+    document.getElementById("toggle-drawing-btn").addEventListener("click", function () {
+      drawingEnabled = !drawingEnabled;
+      if (drawingEnabled) {
+        isDrawing = false; // reset drawing state
+        ctx.beginPath(); // Reset canvas path for clean drawing
+        document.getElementById("toggle-drawing-btn").innerText = 'Stop Drawing';
+      } else {
+        document.getElementById("toggle-drawing-btn").innerText = 'Start Drawing';
+      }
+    });
+
+    // Mouse events to draw freehand within the restricted area
+    canvas.addEventListener("mousedown", function (e) {
+      if (drawingEnabled) {
+        const x = e.offsetX;
+        const y = e.offsetY;
+        // Ensure the drawing is within the allowed region (2x4 cm area)
+        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
+            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
+          isDrawing = true;
+          lastX = x;
+          lastY = y;
+        }
+      }
+    });
+
+    canvas.addEventListener("mousemove", function (e) {
+      if (isDrawing && drawingEnabled) {
+        const x = e.offsetX;
+        const y = e.offsetY;
+        // Ensure drawing within the allowed region
+        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
+            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+          lastX = x;
+          lastY = y;
+        }
+      }
+    });
+
+    canvas.addEventListener("mouseup", function () {
+      isDrawing = false;
+    });
+
+    // Function to add promotional text and link to the image
+    function addPromoTextAndLink() {
+      ctx.font = "20px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText(promoText, 50, canvas.height - 40); // Text position
+
+      // Draw the clickable link (it's static on the canvas as part of the image)
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "blue";
+      ctx.fillText(promoLink, 50, canvas.height - 10);
+    }
+
+    // Event listener to download the final image
+    document.getElementById("download-btn").addEventListener("click", function () {
+      addPromoTextAndLink();
+      const finalImage = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      a.href = finalImage;
+      a.download = "final_image.png";
+      a.click();
+    });
+
+    // Function to generate HTML code for sharing
+    document.getElementById("copy-html-btn").addEventListener("click", function () {
+      addPromoTextAndLink();
+      const finalImage = canvas.toDataURL("image/png");
+      const htmlContent = `
+        <div>
+          <img src="${finalImage}" alt="Final Image" />
+          <p>${promoText}</p>
+          <a href="${promoLink}" target="_blank">${promoLink}</a>
+        </div>
+      `;
+      // Copy HTML to clipboard
+      navigator.clipboard.writeText(htmlContent).then(() => {
+        alert("HTML copied to clipboard. You can now paste it to share.");
+      }).catch(err => {
+        alert("Failed to copy HTML: " + err);
+      });
+    });
+
+  </script>
+
+</body>
+</html>
