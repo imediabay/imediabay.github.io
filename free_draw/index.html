@@ -15,8 +15,8 @@
       margin-top: 20px;
       background-color: #f2f2f2;
     }
-    #download-btn, #copy-html-btn {
-      display: none;
+    #download-btn {
+      display: block;
       margin-top: 20px;
     }
     #draw-area {
@@ -59,9 +59,6 @@
     This application is only available on mobile and tablet devices.
   </div>
 
-  <!-- Button to toggle freehand drawing mode -->
-  <button id="toggle-drawing-btn">Start Drawing</button>
-
   <br />
 
   <!-- Canvas for drawing -->
@@ -72,8 +69,11 @@
   <!-- Button to download the image -->
   <button id="download-btn">Download Image</button>
 
-  <!-- Button to copy HTML with image and link -->
-  <button id="copy-html-btn">Copy HTML to Share</button>
+  <br />
+  <!-- Text below the image for sharing -->
+  <p>
+    <a id="promo-link" href="https://www.example.com" target="_blank" style="color: blue;">Check out our amazing promotion!</a>
+  </p>
 
   <div id="draw-area"></div>
 
@@ -81,11 +81,9 @@
     // Check if the user is on a mobile or tablet device
     function isMobileOrTablet() {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      // Regex for detecting mobile or tablet devices
       return /android/i.test(userAgent) || /iphone|ipod/i.test(userAgent) || /ipad/i.test(userAgent);
     }
 
-    // If not mobile/tablet, show a message and hide the rest of the interface
     if (!isMobileOrTablet()) {
       document.body.innerHTML = '<div style="text-align: center; margin-top: 50px;">This application is only available on mobile and tablet devices.</div>';
     }
@@ -95,7 +93,6 @@
     const drawArea = document.getElementById("draw-area");
     let backgroundImage = new Image();
     let isDrawing = false;
-    let drawingEnabled = false;
     let lastX = 0, lastY = 0;
     const drawWidth = 188.975;  // 5 cm in pixels
     const drawHeight = 264.565; // 7 cm in pixels
@@ -104,44 +101,70 @@
     const promoText = "Check out our amazing promotion!";
     const promoLink = "https://www.example.com";
 
-    // Set the background image (static image)
     backgroundImage.src = "img.webp";  // Your preloaded image path here
 
-    // Once the background image is loaded, update the canvas
     backgroundImage.onload = function() {
       updateCanvas();
     };
 
-    // Set canvas size to larger dimensions for easier drawing
+    // Set canvas size to allow drawing and background
     canvas.width = 360;  // Increased width for better space
     canvas.height = 550; // Keeping the same height as the background image
 
-    // Update the canvas with the background image
     function updateCanvas() {
       if (backgroundImage) {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Draw static background
       }
-      if (drawingEnabled) {
-        ctx.strokeStyle = 'red'; // Drawing color
-        ctx.lineWidth = 5; // Drawing thickness
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-      }
+      ctx.strokeStyle = 'red'; // Drawing color
+      ctx.lineWidth = 5; // Drawing thickness
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
     }
 
-    // Event listener for drawing mode toggle
-    document.getElementById("toggle-drawing-btn").addEventListener("click", function () {
-      drawingEnabled = !drawingEnabled;
+    // Automatically enable drawing
+    let drawingEnabled = true;
+
+    // Mobile touch support
+    canvas.addEventListener("touchstart", function (e) {
+      e.preventDefault(); // Prevent default touch behavior (scrolling, etc.)
       if (drawingEnabled) {
-        isDrawing = false; // reset drawing state
-        ctx.beginPath(); // Reset canvas path for clean drawing
-        document.getElementById("toggle-drawing-btn").innerText = 'Stop Drawing';
-      } else {
-        document.getElementById("toggle-drawing-btn").innerText = 'Start Drawing';
+        const touch = e.touches[0];
+        const x = touch.clientX - canvas.offsetLeft;
+        const y = touch.clientY - canvas.offsetTop;
+        // Ensure the drawing is within the allowed region (5x7 cm area)
+        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
+            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
+          isDrawing = true;
+          lastX = x;
+          lastY = y;
+        }
       }
     });
 
-    // Mouse events to draw freehand within the restricted area
+    canvas.addEventListener("touchmove", function (e) {
+      e.preventDefault(); // Prevent default touch behavior
+      if (isDrawing && drawingEnabled) {
+        const touch = e.touches[0];
+        const x = touch.clientX - canvas.offsetLeft;
+        const y = touch.clientY - canvas.offsetTop;
+        // Ensure drawing within the allowed region
+        if (x >= (canvas.width / 2 - drawWidth / 2) && x <= (canvas.width / 2 + drawWidth / 2) &&
+            y >= (canvas.height / 2 - drawHeight / 2) && y <= (canvas.height / 2 + drawHeight / 2)) {
+          ctx.beginPath();
+          ctx.moveTo(lastX, lastY);
+          ctx.lineTo(x, y);
+          ctx.stroke();
+          lastX = x;
+          lastY = y;
+        }
+      }
+    });
+
+    canvas.addEventListener("touchend", function () {
+      isDrawing = false;
+    });
+
+    // Mouse events for non-touch devices (desktops)
     canvas.addEventListener("mousedown", function (e) {
       if (drawingEnabled) {
         const x = e.clientX - canvas.offsetLeft;
@@ -197,25 +220,6 @@
       a.href = finalImage;
       a.download = "final_image.png";
       a.click();
-    });
-
-    // Function to generate HTML code for sharing
-    document.getElementById("copy-html-btn").addEventListener("click", function () {
-      addPromoTextAndLink();
-      const finalImage = canvas.toDataURL("image/png");
-      const htmlContent = `
-        <div>
-          <img src="${finalImage}" alt="Final Image" />
-          <p>${promoText}</p>
-          <a href="${promoLink}" target="_blank">${promoLink}</a>
-        </div>
-      `;
-      // Copy HTML to clipboard
-      navigator.clipboard.writeText(htmlContent).then(() => {
-        alert("HTML copied to clipboard. You can now paste it to share.");
-      }).catch(err => {
-        alert("Failed to copy HTML: " + err);
-      });
     });
 
   </script>
