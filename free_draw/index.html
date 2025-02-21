@@ -15,9 +15,17 @@
       margin-top: 20px;
       background-color: #f2f2f2;
     }
-    #download-btn {
+    #download-btn, #share-btn {
       display: block;
       margin-top: 20px;
+    }
+    #color-buttons {
+      margin-top: 20px;
+    }
+    #color-buttons button {
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
     }
     #draw-area {
       border: 2px dashed red;
@@ -65,11 +73,27 @@
   <canvas id="canvas"></canvas>
 
   <br />
-  
+
+  <!-- Pen color selection buttons -->
+  <div id="color-buttons">
+    <button id="black-btn" style="background-color: black; color: white;">Black</button>
+    <button id="green-btn" style="background-color: green; color: white;">Green</button>
+    <button id="yellow-btn" style="background-color: yellow; color: black;">Yellow</button>
+    <button id="red-btn" style="background-color: red; color: white;">Red</button>
+  </div>
+
+  <br />
+
   <!-- Button to download the image -->
   <button id="download-btn">Download Image</button>
 
   <br />
+
+  <!-- Share Button for WhatsApp -->
+  <button id="share-btn">Share on WhatsApp</button>
+
+  <br />
+  
   <!-- Text below the image for sharing -->
   <p>
     <a id="promo-link" href="https://www.example.com" target="_blank" style="color: blue;">Check out our amazing promotion!</a>
@@ -94,6 +118,7 @@
     let backgroundImage = new Image();
     let isDrawing = false;
     let lastX = 0, lastY = 0;
+    let currentColor = 'black';  // Default pen color
     const drawWidth = 188.975;  // 5 cm in pixels
     const drawHeight = 264.565; // 7 cm in pixels
 
@@ -115,19 +140,34 @@
       if (backgroundImage) {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Draw static background
       }
-      ctx.strokeStyle = 'red'; // Drawing color
+      ctx.strokeStyle = currentColor; // Drawing color
       ctx.lineWidth = 5; // Drawing thickness
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
     }
 
-    // Automatically enable drawing
-    let drawingEnabled = true;
+    // Color selection functionality
+    document.getElementById("black-btn").addEventListener("click", function() {
+      currentColor = 'black';
+      updateCanvas();
+    });
+    document.getElementById("green-btn").addEventListener("click", function() {
+      currentColor = 'green';
+      updateCanvas();
+    });
+    document.getElementById("yellow-btn").addEventListener("click", function() {
+      currentColor = 'yellow';
+      updateCanvas();
+    });
+    document.getElementById("red-btn").addEventListener("click", function() {
+      currentColor = 'red';
+      updateCanvas();
+    });
 
     // Mobile touch support
     canvas.addEventListener("touchstart", function (e) {
       e.preventDefault(); // Prevent default touch behavior (scrolling, etc.)
-      if (drawingEnabled) {
+      if (isDrawing) {
         const touch = e.touches[0];
         const x = touch.clientX - canvas.offsetLeft;
         const y = touch.clientY - canvas.offsetTop;
@@ -143,7 +183,7 @@
 
     canvas.addEventListener("touchmove", function (e) {
       e.preventDefault(); // Prevent default touch behavior
-      if (isDrawing && drawingEnabled) {
+      if (isDrawing) {
         const touch = e.touches[0];
         const x = touch.clientX - canvas.offsetLeft;
         const y = touch.clientY - canvas.offsetTop;
@@ -166,7 +206,7 @@
 
     // Mouse events for non-touch devices (desktops)
     canvas.addEventListener("mousedown", function (e) {
-      if (drawingEnabled) {
+      if (isDrawing) {
         const x = e.clientX - canvas.offsetLeft;
         const y = e.clientY - canvas.offsetTop;
         // Ensure the drawing is within the allowed region (5x7 cm area)
@@ -180,7 +220,7 @@
     });
 
     canvas.addEventListener("mousemove", function (e) {
-      if (isDrawing && drawingEnabled) {
+      if (isDrawing) {
         const x = e.clientX - canvas.offsetLeft;
         const y = e.clientY - canvas.offsetTop;
         // Ensure drawing within the allowed region
@@ -200,26 +240,20 @@
       isDrawing = false;
     });
 
-    // Function to add promotional text and link to the image
-    function addPromoTextAndLink() {
-      ctx.font = "20px Arial";
-      ctx.fillStyle = "black";
-      ctx.fillText(promoText, 50, canvas.height - 40); // Text position
-
-      // Draw the clickable link (it's static on the canvas as part of the image)
-      ctx.font = "16px Arial";
-      ctx.fillStyle = "blue";
-      ctx.fillText(promoLink, 50, canvas.height - 10);
-    }
-
     // Event listener to download the final image
     document.getElementById("download-btn").addEventListener("click", function () {
-      addPromoTextAndLink();
       const finalImage = canvas.toDataURL("image/png");
       const a = document.createElement("a");
       a.href = finalImage;
       a.download = "final_image.png";
       a.click();
+    });
+
+    // Function to generate WhatsApp sharing URL with image and promo text
+    document.getElementById("share-btn").addEventListener("click", function () {
+      const finalImage = canvas.toDataURL("image/png");
+      const shareUrl = `https://api.whatsapp.com/send?text=Check%20out%20my%20drawing%20and%20promotion!%20${promoLink}%20${finalImage}`;
+      window.open(shareUrl, "_blank");
     });
 
   </script>
