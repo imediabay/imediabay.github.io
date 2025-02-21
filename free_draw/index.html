@@ -240,7 +240,9 @@
     // Function to generate WhatsApp sharing URL with image and promo text
     document.getElementById("share-btn").addEventListener("click", function() {
       const finalImage = canvas.toDataURL("image/png");
-      const shareUrl = `https://api.whatsapp.com/send?text=Check%20out%20my%20drawing%20and%20promotion!%20${promoLink}`;
+      const imageURL = encodeURIComponent(finalImage);
+      const shareText = encodeURIComponent(`${promoText} ${promoLink}`);
+      const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
       window.open(shareUrl, "_blank");
     });
 
