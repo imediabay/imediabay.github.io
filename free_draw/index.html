@@ -277,13 +277,14 @@
       previewBtn.style.display = 'none';  // Hide preview button
       shareSection.style.display = 'none';  // Hide share section
       ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+      updateCanvas();  // Redraw background image on canvas
     });
 
     // Share on WhatsApp after entering the name
     shareBtn.addEventListener("click", function() {
       const name = document.getElementById("name-input").value;
       const finalImage = canvas.toDataURL("image/png");
-      const imageURL = encodeURIComponent(finalImage);
+      const imageURL = encodeURIComponent(finalImage); // Use base64 encoded image
       const shareText = encodeURIComponent(`${promoText} ${promoLink} - Shared by: ${name}`);
       const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
       window.open(shareUrl, "_blank");
