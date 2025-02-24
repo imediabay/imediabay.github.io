@@ -33,7 +33,6 @@
       margin-top: -132.2825px;
       pointer-events: none;
     }
-    /* Mobile specific styles */
     @media (min-width: 768px) {
       body {
         display: none;
@@ -65,19 +64,20 @@
 
   <h1>Draw, Add Text, and Share Image</h1>
 
-  <!-- Mobile/tablet only message -->
+
+  
   <div id="mobile-warning">
     This application is only available on mobile and tablet devices.
   </div>
 
   <br />
 
-  <!-- Canvas for drawing -->
+ 
   <canvas id="canvas"></canvas>
 
   <br />
 
-  <!-- Pen color selection buttons -->
+
   <div id="color-buttons">
     <button id="black-btn" style="background-color: black; color: white;">Black</button>
     <button id="green-btn" style="background-color: green; color: white;">Green</button>
@@ -87,10 +87,10 @@
 
   <br />
 
-  <!-- Preview button -->
+ 
   <button id="preview-btn" style="display: none;">Preview</button>
 
-  <!-- Preview image and buttons -->
+
   <div id="preview-container">
     <h3>Preview your drawing</h3>
     <img id="preview-image" src="" alt="Your drawing preview" width="360" height="550">
@@ -98,7 +98,7 @@
     <button id="draw-again-btn">Draw Again</button>
   </div>
 
-  <!-- Share Section -->
+
   <div id="share-section">
     <label for="name-input">Enter your name:</label>
     <input type="text" id="name-input" placeholder="Your name here">
@@ -108,15 +108,15 @@
 
   <br />
   
-  <!-- Text below the image for sharing -->
+
   <p>
-    <a id="promo-link" href="https://www.example.com" target="_blank" style="color: blue;">Check out our amazing promotion!</a>
+    <a id="promo-link" href="https://www.test.com" target="_blank" style="color: blue;">Check out our amazing offer here!</a>
   </p>
 
   <div id="draw-area"></div>
 
   <script>
-    // Check if the user is on a mobile or tablet device
+  
     function isMobileOrTablet() {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       return /android/i.test(userAgent) || /iphone|ipod/i.test(userAgent) || /ipad/i.test(userAgent);
@@ -142,12 +142,10 @@
     const drawWidth = 188.975; 
     const drawHeight = 264.565;
 
-    // Promotional text and link
     const promoText = "Check out our amazing promotion!";
     const promoLink = "https://www.example.com";
 
-    backgroundImage.src = "img.webp";  // Your preloaded image path here
-
+    backgroundImage.src = "img.webp";  
     backgroundImage.onload = function() {
       updateCanvas();
     };
@@ -165,7 +163,7 @@
       ctx.lineJoin = 'round';
     }
 
-    // Color selection functionality
+   
     document.getElementById("black-btn").addEventListener("click", function() {
       currentColor = 'black';
       updateCanvas();
@@ -256,35 +254,32 @@
 
     canvas.addEventListener("mouseup", function() {
       stopDrawing();
-      // Show the preview button after drawing
       previewBtn.style.display = 'inline-block';
     });
 
     previewBtn.addEventListener("click", function() {
-      // Show the preview section
       const finalImage = canvas.toDataURL("image/png");
       previewImage.src = finalImage;
-      previewContainer.style.display = 'block';  // Show preview
-      canvas.style.display = 'none';  // Hide canvas
-      previewBtn.style.display = 'none';  // Hide preview button
-      shareSection.style.display = 'block';  // Show share section
+      previewContainer.style.display = 'block'; 
+      canvas.style.display = 'none';  
+      previewBtn.style.display = 'none';
+      shareSection.style.display = 'block';
     });
 
     drawAgainBtn.addEventListener("click", function() {
-      // Reset the drawing phase
-      previewContainer.style.display = 'none';  // Hide preview
-      canvas.style.display = 'block';  // Show canvas
-      previewBtn.style.display = 'none';  // Hide preview button
-      shareSection.style.display = 'none';  // Hide share section
-      ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
-      updateCanvas();  // Redraw background image on canvas
+      previewContainer.style.display = 'none'; 
+      canvas.style.display = 'block';  
+      previewBtn.style.display = 'none';  
+      shareSection.style.display = 'none';  
+      ctx.clearRect(0, 0, canvas.width, canvas.height);  
+      updateCanvas(); 
     });
+    
 
-    // Share on WhatsApp after entering the name
     shareBtn.addEventListener("click", function() {
       const name = document.getElementById("name-input").value;
       const finalImage = canvas.toDataURL("image/png");
-      const imageURL = encodeURIComponent(finalImage); // Use base64 encoded image
+      const imageURL = encodeURIComponent(finalImage); 
       const shareText = encodeURIComponent(`${promoText} ${promoLink} - Shared by: ${name}`);
       const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
       window.open(shareUrl, "_blank");
