@@ -15,10 +15,6 @@
       margin-top: 20px;
       background-color: #f2f2f2;
     }
-    #download-btn, #share-btn {
-      display: block;
-      margin-top: 20px;
-    }
     #color-buttons {
       margin-top: 20px;
     }
@@ -28,15 +24,14 @@
       cursor: pointer;
     }
     #draw-area {
-      border: 2px dashed red;
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 188.975px;  /* 5 cm in pixels */
-      height: 264.565px; /* 7 cm in pixels */
-      margin-left: -94.4875px; /* Half the width */
-      margin-top: -132.2825px;  /* Half the height */
-      pointer-events: none;  /* Just for visual reference */
+      width: 188.975px;
+      height: 264.565px;
+      margin-left: -94.4875px;
+      margin-top: -132.2825px;
+      pointer-events: none;
     }
     /* Mobile specific styles */
     @media (min-width: 768px) {
@@ -54,6 +49,14 @@
       padding: 20px;
       background-color: #ffcccb;
       border-radius: 5px;
+      margin-top: 20px;
+    }
+    #preview-container {
+      display: none;
+      margin-top: 20px;
+    }
+    #share-section {
+      display: none;
       margin-top: 20px;
     }
   </style>
@@ -84,8 +87,24 @@
 
   <br />
 
-  <!-- Share Button for WhatsApp -->
-  <button id="share-btn">Share on WhatsApp</button>
+  <!-- Preview button -->
+  <button id="preview-btn" style="display: none;">Preview</button>
+
+  <!-- Preview image and buttons -->
+  <div id="preview-container">
+    <h3>Preview your drawing</h3>
+    <img id="preview-image" src="" alt="Your drawing preview" width="360" height="550">
+    <br>
+    <button id="draw-again-btn">Draw Again</button>
+  </div>
+
+  <!-- Share Section -->
+  <div id="share-section">
+    <label for="name-input">Enter your name:</label>
+    <input type="text" id="name-input" placeholder="Your name here">
+    <br />
+    <button id="share-btn">Share on WhatsApp</button>
+  </div>
 
   <br />
   
@@ -109,13 +128,19 @@
 
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
-    const drawArea = document.getElementById("draw-area");
+    const previewImage = document.getElementById("preview-image");
+    const previewContainer = document.getElementById("preview-container");
+    const shareSection = document.getElementById("share-section");
+    const previewBtn = document.getElementById("preview-btn");
+    const drawAgainBtn = document.getElementById("draw-again-btn");
+    const shareBtn = document.getElementById("share-btn");
+
     let backgroundImage = new Image();
     let isDrawing = false;
     let lastX = 0, lastY = 0;
-    let currentColor = 'black';  // Default pen color
-    const drawWidth = 188.975;  // 5 cm in pixels
-    const drawHeight = 264.565; // 7 cm in pixels
+    let currentColor = 'black';  
+    const drawWidth = 188.975; 
+    const drawHeight = 264.565;
 
     // Promotional text and link
     const promoText = "Check out our amazing promotion!";
@@ -127,16 +152,15 @@
       updateCanvas();
     };
 
-    // Set canvas size to allow drawing and background
-    canvas.width = 360;  // Increased width for better space
-    canvas.height = 550; // Keeping the same height as the background image
+    canvas.width = 360;
+    canvas.height = 550;
 
     function updateCanvas() {
       if (backgroundImage) {
-        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Draw static background
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
       }
-      ctx.strokeStyle = currentColor; // Drawing color
-      ctx.lineWidth = 5; // Drawing thickness
+      ctx.strokeStyle = currentColor;
+      ctx.lineWidth = 5;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
     }
@@ -159,14 +183,12 @@
       updateCanvas();
     });
 
-    // Start drawing
     function startDrawing(x, y) {
       isDrawing = true;
       lastX = x;
       lastY = y;
     }
 
-    // Draw on the canvas
     function draw(x, y) {
       if (isDrawing) {
         ctx.beginPath();
@@ -178,21 +200,18 @@
       }
     }
 
-    // Stop drawing
     function stopDrawing() {
       isDrawing = false;
     }
 
-    // Ensure drawing happens within the box
     function withinDrawArea(x, y) {
       const startX = (canvas.width / 2 - drawWidth / 2);
       const startY = (canvas.height / 2 - drawHeight / 2);
       return x >= startX && x <= startX + drawWidth && y >= startY && y <= startY + drawHeight;
     }
 
-    // Event listeners for drawing (mobile & mouse)
     canvas.addEventListener("touchstart", function(e) {
-      e.preventDefault(); // Prevent default touch behavior (scrolling, etc.)
+      e.preventDefault();
       const touch = e.touches[0];
       const x = touch.clientX - canvas.offsetLeft;
       const y = touch.clientY - canvas.offsetTop;
@@ -213,6 +232,8 @@
 
     canvas.addEventListener("touchend", function() {
       stopDrawing();
+      // Show the preview button after drawing
+      previewBtn.style.display = 'inline-block';
     });
 
     canvas.addEventListener("mousedown", function(e) {
@@ -235,13 +256,35 @@
 
     canvas.addEventListener("mouseup", function() {
       stopDrawing();
+      // Show the preview button after drawing
+      previewBtn.style.display = 'inline-block';
     });
 
-    // Function to generate WhatsApp sharing URL with image and promo text
-    document.getElementById("share-btn").addEventListener("click", function() {
+    previewBtn.addEventListener("click", function() {
+      // Show the preview section
+      const finalImage = canvas.toDataURL("image/png");
+      previewImage.src = finalImage;
+      previewContainer.style.display = 'block';  // Show preview
+      canvas.style.display = 'none';  // Hide canvas
+      previewBtn.style.display = 'none';  // Hide preview button
+      shareSection.style.display = 'block';  // Show share section
+    });
+
+    drawAgainBtn.addEventListener("click", function() {
+      // Reset the drawing phase
+      previewContainer.style.display = 'none';  // Hide preview
+      canvas.style.display = 'block';  // Show canvas
+      previewBtn.style.display = 'none';  // Hide preview button
+      shareSection.style.display = 'none';  // Hide share section
+      ctx.clearRect(0, 0, canvas.width, canvas.height);  // Clear the canvas
+    });
+
+    // Share on WhatsApp after entering the name
+    shareBtn.addEventListener("click", function() {
+      const name = document.getElementById("name-input").value;
       const finalImage = canvas.toDataURL("image/png");
       const imageURL = encodeURIComponent(finalImage);
-      const shareText = encodeURIComponent(`${promoText} ${promoLink}`);
+      const shareText = encodeURIComponent(`${promoText} ${promoLink} - Shared by: ${name}`);
       const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
       window.open(shareUrl, "_blank");
     });
