@@ -63,11 +63,6 @@
 <body>
 
   <h1>Draw, Add Text, and Share Image</h1>
-  
-  <div id="mobile-warning">
-    This application is only available on mobile and tablet devices.
-  </div>
-  <br />
 
   <canvas id="canvas"></canvas>
   <br />
@@ -78,41 +73,24 @@
     <button id="yellow-btn" style="background-color: yellow; color: black;">Yellow</button>
     <button id="red-btn" style="background-color: red; color: white;">Red</button>
   </div>
-  <br />
 
   <button id="preview-btn" style="display: none;">Preview</button>
 
-  <div id="preview-container">
+  <div id="preview-container" style="display: none;">
     <h3>Preview your drawing</h3>
     <img id="preview-image" src="" alt="Your drawing preview" width="360" height="550">
     <br>
     <button id="draw-again-btn">Draw Again</button>
   </div>
 
-  <div id="share-section">
+  <div id="share-section" style="display: none;">
     <label for="name-input">Enter your name:</label>
     <input type="text" id="name-input" placeholder="Your name here">
     <br />
     <button id="share-btn">Share on WhatsApp</button>
   </div>
-  <br />
-  
-  <p>
-    <a id="promo-link" href="https://www.test.com" target="_blank" style="color: blue;">Check out our amazing offer here!</a>
-  </p>
-
-  <div id="draw-area"></div>
 
   <script>
-    function isMobileOrTablet() {
-      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-      return /android/i.test(userAgent) || /iphone|ipod/i.test(userAgent) || /ipad/i.test(userAgent);
-    }
-
-    if (!isMobileOrTablet()) {
-      document.body.innerHTML = '<div style="text-align: center; margin-top: 50px;">This application is only available on mobile and tablet devices.</div>';
-    }
-
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
     const previewImage = document.getElementById("preview-image");
@@ -122,28 +100,11 @@
     const drawAgainBtn = document.getElementById("draw-again-btn");
     const shareBtn = document.getElementById("share-btn");
 
-    let backgroundImage = new Image();
-    let isDrawing = false;
-    let lastX = 0, lastY = 0;
-    let currentColor = 'black';  
-    const drawWidth = 188.975; 
-    const drawHeight = 264.565;
-
-    const promoText = "Check out our amazing promotion!";
-    const promoLink = "https://www.example.com";
-
-    backgroundImage.src = "img.webp";  
-    backgroundImage.onload = function() {
-      updateCanvas();
-    };
-
+    let currentColor = 'black';
     canvas.width = 360;
     canvas.height = 550;
 
     function updateCanvas() {
-      if (backgroundImage) {
-        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-      }
       ctx.strokeStyle = currentColor;
       ctx.lineWidth = 5;
       ctx.lineCap = 'round';
@@ -167,6 +128,9 @@
       updateCanvas();
     });
 
+    let isDrawing = false;
+    let lastX = 0, lastY = 0;
+
     function startDrawing(x, y) {
       isDrawing = true;
       lastX = x;
@@ -188,87 +152,51 @@
       isDrawing = false;
     }
 
-    function withinDrawArea(x, y) {
-      const startX = (canvas.width / 2 - drawWidth / 2);
-      const startY = (canvas.height / 2 - drawHeight / 2);
-      return x >= startX && x <= startX + drawWidth && y >= startY && y <= startY + drawHeight;
-    }
-
-    canvas.addEventListener("touchstart", function(e) {
-      e.preventDefault();
-      const touch = e.touches[0];
-      const x = touch.clientX - canvas.offsetLeft;
-      const y = touch.clientY - canvas.offsetTop;
-      if (withinDrawArea(x, y)) {
-        startDrawing(x, y);
-      }
-    });
-
-    canvas.addEventListener("touchmove", function(e) {
-      e.preventDefault();
-      const touch = e.touches[0];
-      const x = touch.clientX - canvas.offsetLeft;
-      const y = touch.clientY - canvas.offsetTop;
-      if (withinDrawArea(x, y)) {
-        draw(x, y);
-      }
-    });
-
-    canvas.addEventListener("touchend", function() {
-      stopDrawing();
-      // Show the preview button after drawing
-      previewBtn.style.display = 'inline-block';
-    });
-
     canvas.addEventListener("mousedown", function(e) {
       const x = e.clientX - canvas.offsetLeft;
       const y = e.clientY - canvas.offsetTop;
-      if (withinDrawArea(x, y)) {
-        startDrawing(x, y);
-      }
+      startDrawing(x, y);
     });
 
     canvas.addEventListener("mousemove", function(e) {
       if (isDrawing) {
         const x = e.clientX - canvas.offsetLeft;
         const y = e.clientY - canvas.offsetTop;
-        if (withinDrawArea(x, y)) {
-          draw(x, y);
-        }
+        draw(x, y);
       }
     });
 
-    canvas.addEventListener("mouseup", function() {
-      stopDrawing();
-      previewBtn.style.display = 'inline-block';
-    });
+    canvas.addEventListener("mouseup", stopDrawing);
+    canvas.addEventListener("mouseleave", stopDrawing);
 
     previewBtn.addEventListener("click", function() {
-      const finalImage = canvas.toDataURL("image/png");
-      previewImage.src = finalImage;
-      previewContainer.style.display = 'block'; 
-      canvas.style.display = 'none';  
-      previewBtn.style.display = 'none';
-      shareSection.style.display = 'block';
+      canvas.toBlob((blob) => {
+        const imageUrl = URL.createObjectURL(blob);
+        previewImage.src = imageUrl;
+        previewContainer.style.display = 'block'; 
+        canvas.style.display = 'none';
+        previewBtn.style.display = 'none';
+        shareSection.style.display = 'block';
+      }, 'image/png');
     });
 
     drawAgainBtn.addEventListener("click", function() {
       previewContainer.style.display = 'none'; 
-      canvas.style.display = 'block';  
-      previewBtn.style.display = 'none';  
-      shareSection.style.display = 'none';  
-      ctx.clearRect(0, 0, canvas.width, canvas.height);  
-      updateCanvas(); 
+      canvas.style.display = 'block';
+      previewBtn.style.display = 'none';
+      shareSection.style.display = 'none'; 
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
     });
 
     shareBtn.addEventListener("click", function() {
       const name = document.getElementById("name-input").value;
-      const finalImage = canvas.toDataURL("image/png");
-      const shareText = encodeURIComponent(`${promoText} ${promoLink} - Shared by: ${name}`);
-      const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
-      window.open(shareUrl, "_blank");
+      canvas.toBlob((blob) => {
+        const blobUrl = URL.createObjectURL(blob);
+        const shareText = encodeURIComponent(`Check out this drawing! Shared by: ${name}`);
+        const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${blobUrl}`;
+        window.open(shareUrl, "_blank");
+      }, 'image/png');
     });
-
   </script>
 
 </body>
