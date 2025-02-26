@@ -23,33 +23,6 @@
       margin: 5px;
       cursor: pointer;
     }
-    #draw-area {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 188.975px;
-      height: 264.565px;
-      margin-left: -94.4875px;
-      margin-top: -132.2825px;
-      pointer-events: none;
-    }
-    @media (min-width: 768px) {
-      body {
-        display: none;
-      }
-      #mobile-warning {
-        display: block;
-      }
-    }
-    #mobile-warning {
-      display: none;
-      font-size: 18px;
-      color: red;
-      padding: 20px;
-      background-color: #ffcccb;
-      border-radius: 5px;
-      margin-top: 20px;
-    }
     #preview-container {
       display: none;
       margin-top: 20px;
@@ -87,7 +60,7 @@
     <label for="name-input">Enter your name:</label>
     <input type="text" id="name-input" placeholder="Your name here">
     <br />
-    <button id="share-btn">Share on WhatsApp</button>
+    <button id="share-btn">Download and Share on WhatsApp</button>
   </div>
 
   <script>
@@ -192,9 +165,11 @@
       const name = document.getElementById("name-input").value;
       canvas.toBlob((blob) => {
         const blobUrl = URL.createObjectURL(blob);
-        const shareText = encodeURIComponent(`Check out this drawing! Shared by: ${name}`);
-        const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${blobUrl}`;
-        window.open(shareUrl, "_blank");
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'drawing.png';  // Name the image file
+        link.click();
+        alert('Image downloaded! You can now upload it to WhatsApp manually.');
       }, 'image/png');
     });
   </script>
