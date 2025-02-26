@@ -76,7 +76,7 @@
     <label for="name-input">Enter your name:</label>
     <input type="text" id="name-input" placeholder="Your name here">
     <br />
-    <button id="share-btn">Download and Share on WhatsApp</button>
+    <button id="share-btn">Share on WhatsApp</button>
   </div>
 
   <br />
@@ -241,27 +241,17 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);  
       updateCanvas(); 
     });
-    
 
     shareBtn.addEventListener("click", function() {
       const name = document.getElementById("name-input").value;
       const finalImage = canvas.toDataURL("image/png");
+      const imageURL = encodeURIComponent(finalImage);
+      const shareText = encodeURIComponent(`${promoText} ${promoLink} - Shared by: ${name}`);
 
-      // Convert the base64 image to a Blob
-      fetch(finalImage)
-        .then(res => res.blob())
-        .then(blob => {
-          const url = URL.createObjectURL(blob);
-
-          // Create a downloadable link
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'drawing.png'; // Name the downloaded file
-          a.click();
-
-          alert('Image downloaded! You can now upload it to WhatsApp manually.');
-        });
+      const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
+      window.open(shareUrl, "_blank");
     });
+
   </script>
 
 </body>
