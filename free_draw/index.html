@@ -63,20 +63,14 @@
 <body>
 
   <h1>Draw, Add Text, and Share Image</h1>
-
-
   
   <div id="mobile-warning">
     This application is only available on mobile and tablet devices.
   </div>
-
   <br />
 
- 
   <canvas id="canvas"></canvas>
-
   <br />
-
 
   <div id="color-buttons">
     <button id="black-btn" style="background-color: black; color: white;">Black</button>
@@ -84,12 +78,9 @@
     <button id="yellow-btn" style="background-color: yellow; color: black;">Yellow</button>
     <button id="red-btn" style="background-color: red; color: white;">Red</button>
   </div>
-
   <br />
 
- 
   <button id="preview-btn" style="display: none;">Preview</button>
-
 
   <div id="preview-container">
     <h3>Preview your drawing</h3>
@@ -98,17 +89,14 @@
     <button id="draw-again-btn">Draw Again</button>
   </div>
 
-
   <div id="share-section">
     <label for="name-input">Enter your name:</label>
     <input type="text" id="name-input" placeholder="Your name here">
     <br />
     <button id="share-btn">Share on WhatsApp</button>
   </div>
-
   <br />
   
-
   <p>
     <a id="promo-link" href="https://www.test.com" target="_blank" style="color: blue;">Check out our amazing offer here!</a>
   </p>
@@ -116,7 +104,6 @@
   <div id="draw-area"></div>
 
   <script>
-  
     function isMobileOrTablet() {
       const userAgent = navigator.userAgent || navigator.vendor || window.opera;
       return /android/i.test(userAgent) || /iphone|ipod/i.test(userAgent) || /ipad/i.test(userAgent);
@@ -163,7 +150,6 @@
       ctx.lineJoin = 'round';
     }
 
-   
     document.getElementById("black-btn").addEventListener("click", function() {
       currentColor = 'black';
       updateCanvas();
@@ -274,12 +260,10 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);  
       updateCanvas(); 
     });
-    
 
     shareBtn.addEventListener("click", function() {
       const name = document.getElementById("name-input").value;
       const finalImage = canvas.toDataURL("image/png");
-      const imageURL = encodeURIComponent(finalImage); 
       const shareText = encodeURIComponent(`${promoText} ${promoLink} - Shared by: ${name}`);
       const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
       window.open(shareUrl, "_blank");
