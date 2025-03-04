@@ -1,37 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <style>
         body {
             background-color: black;
-            color: white;
+            color: #7b7b7b;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             height: 100vh;
             margin: 0;
             padding: 0;
         }
-        #pdf-viewer {
-            width: 80%;
-            height: 80%;
-            border: 1px solid #ccc;
-            background-color: white;
-            margin-top: 5%;
+
+        canvas {
+            width: 100%;
         }
+
+        #pdf-viewer {
+            width: 90%;
+            height: auto;
+            position: relative;
+        }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: rgb(67, 67, 67);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-button:hover {
+            color: white;
+            border: 1px solid #ffffff;
+        }
+
+        .nav-button:focus-within {
+            scale: 0.9;
+            color: white;
+            border: 1px solid #ffffff;
+        }
+
+        #prev-page {
+            left: -43px;
+        }
+
+        #next-page {
+            right: -43px;
+        }
+
         #navigation {
             position: fixed;
             bottom: 10px;
+            /* left: 10px; */
             text-align: center;
-            width: 100%;
+            width: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 10px;
         }
+
         #form-button {
             position: fixed;
             bottom: 20px;
@@ -43,6 +89,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
         #contact-form-wrapper {
             display: none;
             position: fixed;
@@ -54,6 +101,7 @@
             justify-content: center;
             align-items: center;
         }
+
         #contact-form {
             background-color: white;
             color: black;
@@ -61,9 +109,11 @@
             border-radius: 10px;
             position: relative;
         }
+
         #contact-form h3 {
             margin-top: 0;
         }
+
         #close-form {
             position: absolute;
             top: 10px;
@@ -73,13 +123,42 @@
             font-size: 1.2em;
             cursor: pointer;
         }
+
+        #go-to-page-wrapper {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #go-to-page-wrapper input {
+            width: 50px;
+            padding: 5px;
+            border-radius: 3px;
+            border: none;
+            margin-right: 10px;
+        }
+
+        #go-to-page-wrapper button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+        }
     </style>
 </head>
+
 <body>
-    <div id="pdf-viewer"></div>
+    <div id="pdf-viewer">
+        <button class="nav-button" id="prev-page"><i class="fa fa-angle-left"></i></button>
+        <button class="nav-button" id="next-page"><i class="fa fa-angle-right"></i></button>
+    </div>
     <div id="navigation">
-        <button id="prev-page">Previous</button>
-        <button id="next-page">Next</button>
         <div id="page-info">
             Page: <span id="page-num">1</span> / <span id="page-count">?</span>
         </div>
@@ -106,6 +185,10 @@
             </form>
         </div>
     </div>
+    <div id="go-to-page-wrapper">
+        <input type="number" id="page-number" placeholder="Page #">
+        <button id="go-to-page">Go</button>
+    </div>
     <script>
         const url = 'slide.pdf';
         let pdfDoc = null,
@@ -113,17 +196,27 @@
             pageRendering = false,
             pageNumPending = null,
             canvas = document.createElement('canvas'),
-            ctx = canvas.getContext('2d');
+            ctx = canvas.getContext('2d'),
+            stayTimeStart = new Date(),
+            stayTimes = {};
 
         document.getElementById('pdf-viewer').appendChild(canvas);
 
         function renderPage(num) {
+            if (stayTimes[pageNum]) {
+                stayTimes[pageNum] += (new Date() - stayTimeStart) / 1000;
+            } else {
+                stayTimes[pageNum] = (new Date() - stayTimeStart) / 1000;
+            }
+            console.log(`Time spent on page ${pageNum}: ${stayTimes[pageNum]} seconds`);
+
+            stayTimeStart = new Date();
             pageRendering = true;
-            pdfDoc.getPage(num).then(function(page) {
-                const viewport = page.getViewport({ scale:10 });
+            pdfDoc.getPage(num).then(function (page) {
+                const viewport = page.getViewport({ scale: 1 });
                 const scale = Math.min((document.getElementById('pdf-viewer').clientWidth / viewport.width),
-                                        (document.getElementById('pdf-viewer').clientHeight / viewport.height));
-                const scaledViewport = page.getViewport({ scale: scale*10 });
+                    (document.getElementById('pdf-viewer').clientHeight / viewport.height));
+                const scaledViewport = page.getViewport({ scale: scale * 10.5 });
                 canvas.height = scaledViewport.height;
                 canvas.width = scaledViewport.width;
 
@@ -133,7 +226,7 @@
                 };
                 const renderTask = page.render(renderContext);
 
-                renderTask.promise.then(function() {
+                renderTask.promise.then(function () {
                     pageRendering = false;
                     if (pageNumPending !== null) {
                         renderPage(pageNumPending);
@@ -172,7 +265,84 @@
         document.getElementById('prev-page').addEventListener('click', onPrevPage);
         document.getElementById('next-page').addEventListener('click', onNextPage);
 
-        pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+               // Add event listener for keyboard navigation
+               document.addEventListener('keydown', function (event) {
+            if (event.key === 'ArrowLeft') {
+                onPrevPage();
+            } else if (event.key === 'ArrowRight') {
+                onNextPage();
+            } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                // For Up and Down arrows, you can decide what functionality you want
+                // Here we use them for the same page navigation as Left and Right
+                if (event.key === 'ArrowUp') {
+                    onPrevPage();
+                } else if (event.key === 'ArrowDown') {
+                    onNextPage();
+                }
+            }
+        });
+
+        // Add touch event listeners for swipe navigation on mobile devices
+        let touchStartX = null;
+        let touchStartY = null;
+
+        document.addEventListener('touchstart', function (event) {
+            touchStartX = event.changedTouches[0].screenX;
+            touchStartY = event.changedTouches[0].screenY;
+        }, false);
+
+        document.addEventListener('touchend', function (event) {
+            if (touchStartX !== null && touchStartY !== null) {
+                let touchEndX = event.changedTouches[0].screenX;
+                let touchEndY = event.changedTouches[0].screenY;
+                let diffX = touchStartX - touchEndX;
+                let diffY = touchStartY - touchEndY;
+
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    // Horizontal swipe
+                    if (diffX > 0) {
+                        onNextPage(); // Swipe left
+                    } else {
+                        onPrevPage(); // Swipe right
+                    }
+                } else {
+                    // Vertical swipe
+                    if (diffY > 0) {
+                        onNextPage(); // Swipe up
+                    } else {
+                        onPrevPage(); // Swipe down
+                    }
+                }
+                touchStartX = null;
+                touchStartY = null;
+            }
+        }, false);
+
+        // Go to specific page when number is entered and button is clicked
+        document.getElementById('go-to-page').addEventListener('click', function () {
+            let pageNumber = parseInt(document.getElementById('page-number').value);
+            if (pageNumber > 0 && pageNumber <= pdfDoc.numPages) {
+                pageNum = pageNumber;
+                queueRenderPage(pageNum);
+            } else {
+                alert("Please enter a valid page number.");
+            }
+        });
+
+        // Go to specific page when number is entered and 'Enter' key is pressed
+        document.getElementById('page-number').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                let pageNumber = parseInt(document.getElementById('page-number').value);
+                if (pageNumber > 0 && pageNumber <= pdfDoc.numPages) {
+                    pageNum = pageNumber;
+                    queueRenderPage(pageNum);
+                } else {
+                    alert("Please enter a valid page number.");
+                }
+            }
+        });
+
+        pdfjsLib.getDocument(url).promise.then(function (pdfDoc_) {
             pdfDoc = pdfDoc_;
             document.getElementById('page-count').textContent = pdfDoc.numPages;
             renderPage(pageNum);
@@ -187,7 +357,7 @@
         });
 
         // Contact form submission
-        document.getElementById('form').addEventListener('submit', function(event) {
+        document.getElementById('form').addEventListener('submit', function (event) {
             event.preventDefault();
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
@@ -196,24 +366,23 @@
             const contact = document.getElementById('contact').value;
             const message = document.getElementById('message').value;
 
-Email.send({
-    Host: "smtp.gmail.com",
-    Username: "your-email@gmail.com",
-    Password: "your-app-password",
-    To: 'recipient@example.com',
-    From: "your-email@gmail.com",
-    Subject: "This is the subject",
-    Body: "And this is the body"
-}).then(
-  message => alert(message)
-);
-
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username: "your-email@gmail.com",
+                Password: "your-app-password",
+                To: 'recipient@example.com',
+                From: "your-email@gmail.com",
+                Subject: "This is the subject",
+                Body: "And this is the body"
+            }).then(
+                message => alert(message)
+            );
 
             Email.send({
-                Host : "smtp.mailendo.com",
-    Username : "imediabay@gmail.com",
-    Password : "Pufferfish@2303",
-                To: 'imediabay@gmail.com',
+                Host: "smtp.mailendo.com",
+                Username: "test@gmail.com",
+                Password: "test@2303",
+                To: 'test@gmail.com',
                 From: email,
                 Subject: 'Contact Form Submission',
                 Body: `Name: ${name}<br>Email: ${email}<br>Organization: ${company}<br>Country: ${country}<br>Contact Number: ${contact}<br>Message: ${message}`
@@ -228,9 +397,9 @@ Email.send({
             window.onbeforeunload = () => {
                 let stayTimeEnd = new Date();
                 let timeSpent = Math.round((stayTimeEnd - stayTimeStart) / 1000); // Time in seconds
-                
             };
         };
     </script>
 </body>
+
 </html>
