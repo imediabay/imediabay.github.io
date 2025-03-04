@@ -46,17 +46,40 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: transform 0.5s, color 0.5s; /* Add transition for glowing effect */
         }
 
-        .nav-button:hover {
-            color: white;
-            border: 1px solid #ffffff;
-        }
-
+        .nav-button:hover,
         .nav-button:focus-within {
-            scale: 0.9;
             color: white;
             border: 1px solid #ffffff;
+            transform: scale(1.1); /* Add scale transformation for glowing effect */
+        }
+
+        .slide-left {
+            animation: slide-left 0.5s forwards;
+        }
+
+        .slide-right {
+            animation: slide-right 0.5s forwards;
+        }
+
+        @keyframes slide-left {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slide-right {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
 
         #prev-page {
@@ -70,7 +93,6 @@
         #navigation {
             position: fixed;
             bottom: 10px;
-            /* left: 10px; */
             text-align: center;
             width: auto;
             background-color: rgba(0, 0, 0, 0.5);
@@ -252,6 +274,9 @@
             }
             pageNum--;
             queueRenderPage(pageNum);
+            canvas.classList.add('slide-right'); // Add slide-right class
+            setTimeout(() => canvas.classList.remove('slide-right'), 500); // Remove class after animation
+            flashNavButton('prev-page'); // Flash navigation button
         }
 
         function onNextPage() {
@@ -260,26 +285,34 @@
             }
             pageNum++;
             queueRenderPage(pageNum);
+            canvas.classList.add('slide-left'); // Add slide-left class
+            setTimeout(() => canvas.classList.remove('slide-left'), 500); // Remove class after animation
+            flashNavButton('next-page'); // Flash navigation button
+        }
+
+        function flashNavButton(buttonId) {
+            const button = document.getElementById(buttonId);
+            button.classList.add('flash');
+            setTimeout(() => button.classList.remove('flash'), 500);
         }
 
         document.getElementById('prev-page').addEventListener('click', onPrevPage);
         document.getElementById('next-page').addEventListener('click', onNextPage);
 
-               // Add event listener for keyboard navigation
-               document.addEventListener('keydown', function (event) {
+        // Add event listener for keyboard navigation
+        document.addEventListener('keydown', function (event) {
             if (event.key === 'ArrowLeft') {
                 onPrevPage();
             } else if (event.key === 'ArrowRight') {
                 onNextPage();
-            } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-                // For Up and Down arrows, you can decide what functionality you want
-                // Here we use them for the same page navigation as Left and Right
-                if (event.key === 'ArrowUp') {
-                    onPrevPage();
-                } else if (event.key === 'ArrowDown') {
-                    onNextPage();
-                }
-            }
+            } 
+            // else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+            //     if (event.key === 'ArrowUp') {
+            //         onPrevPage();
+            //     } else if (event.key === 'ArrowDown') {
+            //         onNextPage();
+            //     }
+            // }
         });
 
         // Add touch event listeners for swipe navigation on mobile devices
@@ -305,14 +338,15 @@
                     } else {
                         onPrevPage(); // Swipe right
                     }
-                } else {
-                    // Vertical swipe
-                    if (diffY > 0) {
-                        onNextPage(); // Swipe up
-                    } else {
-                        onPrevPage(); // Swipe down
-                    }
-                }
+                } 
+                // else {
+                //     // Vertical swipe
+                //     if (diffY > 0) {
+                //         onNextPage(); // Swipe up
+                //     } else {
+                //         onPrevPage(); // Swipe down
+                //     }
+                // }
                 touchStartX = null;
                 touchStartY = null;
             }
