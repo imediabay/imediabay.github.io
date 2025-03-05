@@ -26,16 +26,6 @@
       margin: 5px;
       cursor: pointer;
     }
-    #draw-area {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 188.975px;
-      height: 264.565px;
-      margin-left: -94.4875px;
-      margin-top: -132.2825px;
-      pointer-events: none;
-    }
     #mobile-warning {
       display: none;
       font-size: 18px;
@@ -67,6 +57,9 @@
       border: 1px solid #000;
       box-sizing: border-box;
       position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
       cursor: move;
     }
   </style>
@@ -103,8 +96,6 @@
     <input type="text" id="name-input" placeholder="Your name here">
     <button id="share-btn">Share on WhatsApp</button>
   </div>
-
-  <div id="draw-area"></div>
 
   <script>
     function isMobileOrTablet() {
@@ -252,61 +243,71 @@
 
       function onMouseMove(e) {
         if (dragged) {
-          mainTextBox.style.left = (e.clientX - offsetX) + 'px';
-          mainTextBox.style.top = (e.clientY - offsetY) + 'px';
+          const x = e.clientX - offsetX;
+          const y = e.clientY - offsetY;
+          
+                    // Ensure the text box stays within the drawable area
+                    if (y >= canvas.offsetTop && y + mainTextBox.offsetHeight <= canvas.offsetTop + canvas.offsetHeight) {
+            mainTextBox.style.top = y + 'px';
+          }
         }
       }
 
-document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mousemove', onMouseMove);
 
-mainTextBox.addEventListener('mouseup', function() {
-  document.removeEventListener('mousemove', onMouseMove);
-  mainTextBox.removeEventListener('mouseup', onMouseMove);
-  dragged = false;
-});
-});
+      document.addEventListener('mouseup', function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        dragged = false;
+      });
+    });
 
-previewBtn.addEventListener("click", function() {
-ctx.fillStyle = 'red';
-ctx.font = 'bold 20px "Playwrite IT Moderna", cursive';
-let x = parseInt(mainTextBox.style.left, 10) || 50;
-let y = parseInt(mainTextBox.style.top, 10) || 50;
+    previewBtn.addEventListener("click", function() {
+      ctx.fillStyle = 'red';
+      ctx.font = 'bold 20px "Playwrite IT Moderna", cursive';
+      const text = mainTextBox.value;
 
-// Adjust coordinates to be relative to the canvas
-const canvasRect = canvas.getBoundingClientRect();
-const textBoxRect = mainTextBox.getBoundingClientRect();
-x = textBoxRect.left - canvasRect.left;
-y = textBoxRect.top - canvasRect.top + parseInt(window.getComputedStyle(mainTextBox).fontSize, 10);
+      // Draw the text box at the specified position
+      const x = parseInt(mainTextBox.style.left) - canvas.offsetLeft;
+      const y = parseInt(mainTextBox.style.top) - canvas.offsetTop + parseInt(window.getComputedStyle(mainTextBox).fontSize);
 
-ctx.fillText(mainTextBox.value, x, y); // Draw text on the canvas with specified font style and color
-const finalImage = canvas.toDataURL("image/png");
-previewImage.src = finalImage;
-previewContainer.style.display = 'block'; 
-canvas.style.display = 'none';  
-previewBtn.style.display = 'none';
-shareSection.style.display = 'block';
-});
+      // Preserve the existing drawing on the canvas
+      const currentCanvas = canvas.toDataURL();
+      const img = new Image();
+      img.src = currentCanvas;
+      img.onload = function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+        ctx.drawImage(img, 0, 0); // Redraw the existing drawing
+        ctx.fillText(text, x, y); // Draw the text on the canvas with specified font style and color
 
-drawAgainBtn.addEventListener("click", function() {
-previewContainer.style.display = 'none'; 
-canvas.style.display = 'block';  
-previewBtn.style.display = 'none';  
-shareSection.style.display = 'none';  
-ctx.clearRect(0, 0, canvas.width, canvas.height);  
-updateCanvas(); 
-mainTextBox.value = ''; // Clear the text box
-});
+        const finalImage = canvas.toDataURL("image/png");
+        previewImage.src = finalImage;
+        previewContainer.style.display = 'block';
+        canvas.style.display = 'none';
+        previewBtn.style.display = 'none';
+        shareSection.style.display = 'block';
+      };
+    });
 
-shareBtn.addEventListener("click", function() {
-const name = document.getElementById("name-input").value;
-const finalImage = canvas.toDataURL("image/png");
-const imageURL = encodeURIComponent(finalImage); 
-const shareText = encodeURIComponent(`Check out our amazing promotion! https://www.example.com - Shared by: ${name}`);
-const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
-window.open(shareUrl, "_blank");
-});
+    drawAgainBtn.addEventListener("click", function() {
+      previewContainer.style.display = 'none';
+      canvas.style.display = 'block';
+      previewBtn.style.display = 'none';
+      shareSection.style.display = 'none';
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      updateCanvas();
+      mainTextBox.value = ''; // Clear the text box
+    });
 
-</script>
+    shareBtn.addEventListener("click", function() {
+      const name = document.getElementById("name-input").value;
+      const finalImage = canvas.toDataURL("image/png");
+      const imageURL = encodeURIComponent(finalImage);
+      const shareText = encodeURIComponent(`Check out our amazing promotion! https://www.example.com - Shared by: ${name}`);
+      const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
+      window.open(shareUrl, "_blank");
+    });
+
+  </script>
 
 </body>
 </html>
