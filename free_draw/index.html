@@ -240,6 +240,9 @@
     mainTextBox.addEventListener('input', validateTextInput);
 
     previewBtn.addEventListener("click", function() {
+      ctx.fillStyle = 'red';
+      ctx.font = 'bold 20px "Playwrite IT Moderna", cursive';
+      ctx.fillText(mainTextBox.value, 50, 50); // Draw text on the canvas with specified font style and color
       const finalImage = canvas.toDataURL("image/png");
       previewImage.src = finalImage;
       previewContainer.style.display = 'block'; 
@@ -255,6 +258,7 @@
       shareSection.style.display = 'none';  
       ctx.clearRect(0, 0, canvas.width, canvas.height);  
       updateCanvas(); 
+      mainTextBox.value = ''; // Clear the text box
     });
 
     shareBtn.addEventListener("click", function() {
