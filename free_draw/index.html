@@ -66,6 +66,8 @@
       padding: 10px;
       border: 1px solid #000;
       box-sizing: border-box;
+      position: absolute;
+      cursor: move;
     }
   </style>
 </head>
@@ -128,7 +130,8 @@
     let isDrawing = false;
     let lastX = 0, lastY = 0;
     let currentColor = 'black';
-    
+    let dragged = false;
+
     backgroundImage.src = "img.webp";  
     backgroundImage.onload = function() {
       updateCanvas();
@@ -179,6 +182,7 @@
         lastX = x;
         lastY = y;
       }
+      previewBtn.style.display = 'inline-block';
     }
 
     function stopDrawing() {
@@ -231,46 +235,78 @@
       const regex = /^[a-zA-Z\s]*$/; // Only allows English letters and spaces
       const value = event.target.value.toUpperCase();
       if (!regex.test(value) || restrictedWords.some(word => value.includes(word))) {
-        event.target.value = value.slice(0, -1);
+        event.target.value = value.replace(/[^a-zA-Z\s]/g, '').replace(new RegExp(restrictedWords.join('|'), 'gi'), '');
         alert('Invalid input. Please use only English letters and avoid restricted words.');
       }
+      previewBtn.style.display = 'inline-block';
     }
 
     // Validate text box input
     mainTextBox.addEventListener('input', validateTextInput);
 
-    previewBtn.addEventListener("click", function() {
-      ctx.fillStyle = 'red';
-      ctx.font = 'bold 20px "Playwrite IT Moderna", cursive';
-      ctx.fillText(mainTextBox.value, 50, 50); // Draw text on the canvas with specified font style and color
-      const finalImage = canvas.toDataURL("image/png");
-      previewImage.src = finalImage;
-      previewContainer.style.display = 'block'; 
-      canvas.style.display = 'none';  
-      previewBtn.style.display = 'none';
-      shareSection.style.display = 'block';
-    });
+    // Drag and drop text box
+    mainTextBox.addEventListener('mousedown', function(e) {
+      const offsetX = e.clientX - mainTextBox.offsetLeft;
+      const offsetY = e.clientY - mainTextBox.offsetTop;
+      dragged = true;
 
-    drawAgainBtn.addEventListener("click", function() {
-      previewContainer.style.display = 'none'; 
-      canvas.style.display = 'block';  
-      previewBtn.style.display = 'none';  
-      shareSection.style.display = 'none';  
-      ctx.clearRect(0, 0, canvas.width, canvas.height);  
-      updateCanvas(); 
-      mainTextBox.value = ''; // Clear the text box
-    });
+      function onMouseMove(e) {
+        if (dragged) {
+          mainTextBox.style.left = (e.clientX - offsetX) + 'px';
+          mainTextBox.style.top = (e.clientY - offsetY) + 'px';
+        }
+      }
 
-    shareBtn.addEventListener("click", function() {
-      const name = document.getElementById("name-input").value;
-      const finalImage = canvas.toDataURL("image/png");
-      const imageURL = encodeURIComponent(finalImage); 
-      const shareText = encodeURIComponent(`Check out our amazing promotion! https://www.example.com - Shared by: ${name}`);
-      const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
-      window.open(shareUrl, "_blank");
-    });
+document.addEventListener('mousemove', onMouseMove);
 
-  </script>
+mainTextBox.addEventListener('mouseup', function() {
+  document.removeEventListener('mousemove', onMouseMove);
+  mainTextBox.removeEventListener('mouseup', onMouseMove);
+  dragged = false;
+});
+});
+
+previewBtn.addEventListener("click", function() {
+ctx.fillStyle = 'red';
+ctx.font = 'bold 20px "Playwrite IT Moderna", cursive';
+let x = parseInt(mainTextBox.style.left, 10) || 50;
+let y = parseInt(mainTextBox.style.top, 10) || 50;
+
+// Adjust coordinates to be relative to the canvas
+const canvasRect = canvas.getBoundingClientRect();
+const textBoxRect = mainTextBox.getBoundingClientRect();
+x = textBoxRect.left - canvasRect.left;
+y = textBoxRect.top - canvasRect.top + parseInt(window.getComputedStyle(mainTextBox).fontSize, 10);
+
+ctx.fillText(mainTextBox.value, x, y); // Draw text on the canvas with specified font style and color
+const finalImage = canvas.toDataURL("image/png");
+previewImage.src = finalImage;
+previewContainer.style.display = 'block'; 
+canvas.style.display = 'none';  
+previewBtn.style.display = 'none';
+shareSection.style.display = 'block';
+});
+
+drawAgainBtn.addEventListener("click", function() {
+previewContainer.style.display = 'none'; 
+canvas.style.display = 'block';  
+previewBtn.style.display = 'none';  
+shareSection.style.display = 'none';  
+ctx.clearRect(0, 0, canvas.width, canvas.height);  
+updateCanvas(); 
+mainTextBox.value = ''; // Clear the text box
+});
+
+shareBtn.addEventListener("click", function() {
+const name = document.getElementById("name-input").value;
+const finalImage = canvas.toDataURL("image/png");
+const imageURL = encodeURIComponent(finalImage); 
+const shareText = encodeURIComponent(`Check out our amazing promotion! https://www.example.com - Shared by: ${name}`);
+const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
+window.open(shareUrl, "_blank");
+});
+
+</script>
 
 </body>
 </html>
