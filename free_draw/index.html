@@ -245,9 +245,11 @@
         if (dragged) {
           const x = e.clientX - offsetX;
           const y = e.clientY - offsetY;
-          
-                    // Ensure the text box stays within the drawable area
-                    if (y >= canvas.offsetTop && y + mainTextBox.offsetHeight <= canvas.offsetTop + canvas.offsetHeight) {
+          // Ensure the text box stays within the drawable area
+          if (x >= canvas.offsetLeft && x + mainTextBox.offsetWidth <= canvas.offsetLeft + canvas.offsetWidth) {
+            mainTextBox.style.left = x + 'px';
+          }
+          if (y >= canvas.offsetTop && y + mainTextBox.offsetHeight <= canvas.offsetTop + canvas.offsetHeight) {
             mainTextBox.style.top = y + 'px';
           }
         }
@@ -302,9 +304,17 @@
       const name = document.getElementById("name-input").value;
       const finalImage = canvas.toDataURL("image/png");
       const imageURL = encodeURIComponent(finalImage);
-      const shareText = encodeURIComponent(`Check out our amazing promotion! https://www.example.com - Shared by: ${name}`);
-      const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
-      window.open(shareUrl, "_blank");
+      const shareText = `Check out our amazing promotion! https://www.example.com - Shared by: ${name}`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'Promotion',
+          text: shareText,
+          files: [new File([finalImage], "image.png", { type: "image/png" })],
+        }).catch((error) => console.error("Error sharing:", error));
+      } else {
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}&url=${imageURL}`;
+        window.open(whatsappUrl, "_blank");
+      }
     });
 
   </script>
