@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Draw, Add Text, and Share Image</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -23,6 +26,16 @@
       margin: 5px;
       cursor: pointer;
     }
+    #draw-area {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 188.975px;
+      height: 264.565px;
+      margin-left: -94.4875px;
+      margin-top: -132.2825px;
+      pointer-events: none;
+    }
     #mobile-warning {
       display: none;
       font-size: 18px;
@@ -40,6 +53,20 @@
       display: none;
       margin-top: 20px;
     }
+    .text-input {
+      font-family: 'Playwrite IT Moderna', cursive;
+      font-weight: bold;
+      color: red;
+      font-size: 20px;
+      outline: none;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 300px;
+      display: inline-block;
+      padding: 10px;
+      border: 1px solid #000;
+      box-sizing: border-box;
+    }
   </style>
 </head>
 <body>
@@ -50,10 +77,9 @@
     This application is only available on mobile and tablet devices.
   </div>
 
-  <br />
+  <textarea id="main-text-box" class="text-input" placeholder="Type here..."></textarea>
 
   <canvas id="canvas"></canvas>
-  <br />
 
   <div id="color-buttons">
     <button id="black-btn" style="background-color: black; color: white;">Black</button>
@@ -61,29 +87,22 @@
     <button id="yellow-btn" style="background-color: yellow; color: black;">Yellow</button>
     <button id="red-btn" style="background-color: red; color: white;">Red</button>
   </div>
-  <br />
 
   <button id="preview-btn" style="display: none;">Preview</button>
 
   <div id="preview-container">
     <h3>Preview your drawing</h3>
     <img id="preview-image" src="" alt="Your drawing preview" width="360" height="550">
-    <br>
     <button id="draw-again-btn">Draw Again</button>
   </div>
 
   <div id="share-section">
     <label for="name-input">Enter your name:</label>
     <input type="text" id="name-input" placeholder="Your name here">
-    <br />
     <button id="share-btn">Share on WhatsApp</button>
   </div>
 
-  <br />
-
-  <p>
-    <a id="promo-link" href="https://www.test.com" target="_blank" style="color: blue;">Check out our amazing offer here!</a>
-  </p>
+  <div id="draw-area"></div>
 
   <script>
     function isMobileOrTablet() {
@@ -103,17 +122,13 @@
     const previewBtn = document.getElementById("preview-btn");
     const drawAgainBtn = document.getElementById("draw-again-btn");
     const shareBtn = document.getElementById("share-btn");
+    const mainTextBox = document.getElementById("main-text-box");
 
     let backgroundImage = new Image();
     let isDrawing = false;
     let lastX = 0, lastY = 0;
-    let currentColor = 'black';  
-    const drawWidth = 188.975; 
-    const drawHeight = 264.565;
-
-    const promoText = "Check out our amazing promotion!";
-    const promoLink = "https://www.example.com";
-
+    let currentColor = 'black';
+    
     backgroundImage.src = "img.webp";  
     backgroundImage.onload = function() {
       updateCanvas();
@@ -170,20 +185,12 @@
       isDrawing = false;
     }
 
-    function withinDrawArea(x, y) {
-      const startX = (canvas.width / 2 - drawWidth / 2);
-      const startY = (canvas.height / 2 - drawHeight / 2);
-      return x >= startX && x <= startX + drawWidth && y >= startY && y <= startY + drawHeight;
-    }
-
     canvas.addEventListener("touchstart", function(e) {
       e.preventDefault();
       const touch = e.touches[0];
       const x = touch.clientX - canvas.offsetLeft;
       const y = touch.clientY - canvas.offsetTop;
-      if (withinDrawArea(x, y)) {
-        startDrawing(x, y);
-      }
+      startDrawing(x, y);
     });
 
     canvas.addEventListener("touchmove", function(e) {
@@ -191,9 +198,7 @@
       const touch = e.touches[0];
       const x = touch.clientX - canvas.offsetLeft;
       const y = touch.clientY - canvas.offsetTop;
-      if (withinDrawArea(x, y)) {
-        draw(x, y);
-      }
+      draw(x, y);
     });
 
     canvas.addEventListener("touchend", function() {
@@ -204,18 +209,14 @@
     canvas.addEventListener("mousedown", function(e) {
       const x = e.clientX - canvas.offsetLeft;
       const y = e.clientY - canvas.offsetTop;
-      if (withinDrawArea(x, y)) {
-        startDrawing(x, y);
-      }
+      startDrawing(x, y);
     });
 
     canvas.addEventListener("mousemove", function(e) {
       if (isDrawing) {
         const x = e.clientX - canvas.offsetLeft;
         const y = e.clientY - canvas.offsetTop;
-        if (withinDrawArea(x, y)) {
-          draw(x, y);
-        }
+        draw(x, y);
       }
     });
 
@@ -223,6 +224,20 @@
       stopDrawing();
       previewBtn.style.display = 'inline-block';
     });
+
+    // Function to validate text input
+    function validateTextInput(event) {
+      const restrictedWords = ['FUCK', 'Donald', 'Trump'];
+      const regex = /^[a-zA-Z\s]*$/; // Only allows English letters and spaces
+      const value = event.target.value.toUpperCase();
+      if (!regex.test(value) || restrictedWords.some(word => value.includes(word))) {
+        event.target.value = value.slice(0, -1);
+        alert('Invalid input. Please use only English letters and avoid restricted words.');
+      }
+    }
+
+    // Validate text box input
+    mainTextBox.addEventListener('input', validateTextInput);
 
     previewBtn.addEventListener("click", function() {
       const finalImage = canvas.toDataURL("image/png");
@@ -245,9 +260,8 @@
     shareBtn.addEventListener("click", function() {
       const name = document.getElementById("name-input").value;
       const finalImage = canvas.toDataURL("image/png");
-      const imageURL = encodeURIComponent(finalImage);
-      const shareText = encodeURIComponent(`${promoText} ${promoLink} - Shared by: ${name}`);
-
+      const imageURL = encodeURIComponent(finalImage); 
+      const shareText = encodeURIComponent(`Check out our amazing promotion! https://www.example.com - Shared by: ${name}`);
       const shareUrl = `https://api.whatsapp.com/send?text=${shareText}&url=${imageURL}`;
       window.open(shareUrl, "_blank");
     });
