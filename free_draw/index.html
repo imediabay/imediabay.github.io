@@ -239,19 +239,20 @@
       previewBtn.style.display = 'inline-block';
     });
 
-    function validateTextInput(event) {
-      const restrictedWords = ['FUCK', 'Donald', 'Trump'];
-      const regex = /^[a-zA-Z0-9\p{Emoji}]*$/u; // Allows a-z, A-Z, 0-9, and all emojis
-      const value = event.target.value.toUpperCase();
+function validateTextInput(event) {
+  const restrictedWords = ['FUCK', 'Donald', 'Trump'];
+  const regex = /^[a-zA-Z0-9\p{Emoji}]*$/u; // Allows English letters, numbers, and all emojis
+  const value = event.target.value;
 
-      if (!regex.test(value) || restrictedWords.some(word => value.includes(word))) {
-        event.target.value = value
-          .replace(/[^a-zA-Z0-9\p{Emoji}]/gu, '') // Removes invalid characters
-          .replace(new RegExp(restrictedWords.join('|'), 'gi'), ''); // Removes restricted words
-        alert('Invalid input. Please use only English letters, numbers, emojis, and avoid restricted words.');
-      }
-      previewBtn.style.display = 'inline-block';
-    }
+  if (!regex.test(value) || restrictedWords.some(word => value.toUpperCase().includes(word))) {
+    event.target.value = value
+      .replace(/[^\p{L}\p{N}\p{Emoji}]/gu, '') // Removes invalid characters
+      .replace(new RegExp(restrictedWords.join('|'), 'gi'), ''); // Removes restricted words
+    alert('Invalid input. Please use only English letters, numbers, emojis, and avoid restricted words.');
+  }
+  previewBtn.style.display = 'inline-block';
+}
+
     // Validate text box input
     mainTextBox.addEventListener('input', validateTextInput);
 
