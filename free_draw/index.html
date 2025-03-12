@@ -72,12 +72,9 @@
       transform: translate(-50%, -50%);
       cursor: move;
     }
-
     .text-input::placeholder {
-      color: white;
-      /* Set the placeholder text color to white */
-      opacity: 0.7;
-      /* Ensure full opacity for better visibility */
+      color: white; /* Set the placeholder text color to white */
+      opacity: 0.7; /* Ensure full opacity for better visibility */
     }
   </style>
 </head>
@@ -90,8 +87,7 @@
     This application is only available on mobile and tablet devices.
   </div>
 
-  <textarea id="main-text-box" class="text-input" maxlength="12" placeholder="Type here..." spellcheck="false"
-    style="text-transform: uppercase;"></textarea>
+  <textarea id="main-text-box" class="text-input" maxlength="12" placeholder="Type here..." spellcheck="false"></textarea>
 
   <canvas id="canvas"></canvas>
 
@@ -239,19 +235,21 @@
       previewBtn.style.display = 'inline-block';
     });
 
-function validateTextInput(event) {
-  const restrictedWords = ['FUCK', 'Donald', 'Trump'];
-  const regex = /^[a-zA-Z0-9\p{Emoji}]*$/u; // Allows English letters, numbers, and all emojis
-  const value = event.target.value;
+    // Function to validate text input
+    function validateTextInput(event) {
+      const restrictedWords = ['FUCK', 'Donald', 'Trump'];
+      const regex = /^[a-zA-Z0-9\p{Emoji}]*$/u; 
+      const value = event.target.value.toUpperCase();
+      if (!regex.test(value) || restrictedWords.some(word => value.includes(word))) {
+        event.target.value = value
+          .replace(/[^\p{L}\p{N}\p{Emoji}]/gu, '', '') 
+          .replace(new RegExp(restrictedWords.join('|'), 'gi'), ''); 
+        alert('Invalid input. Please use only English letters, numbers, emojis, and avoid restricted words.');
+      }
+      previewBtn.style.display = 'inline-block';
+    }
 
-  if (!regex.test(value) || restrictedWords.some(word => value.toUpperCase().includes(word))) {
-    event.target.value = value
-      .replace(/[^\p{L}\p{N}\p{Emoji}]/gu, '') // Removes invalid characters
-      .replace(new RegExp(restrictedWords.join('|'), 'gi'), ''); // Removes restricted words
-    alert('Invalid input. Please use only English letters, numbers, emojis, and avoid restricted words.');
-  }
-  previewBtn.style.display = 'inline-block';
-}
+
 
     // Validate text box input
     mainTextBox.addEventListener('input', validateTextInput);
