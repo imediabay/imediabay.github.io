@@ -54,7 +54,8 @@
       max-width: 300px;
       display: inline-block;
       padding: 10px;
-      border: 1px solid #000;
+      background: transparent;
+      border: none;
       box-sizing: border-box;
       position: absolute;
       left: 50%;
@@ -223,10 +224,10 @@
     // Function to validate text input
     function validateTextInput(event) {
       const restrictedWords = ['FUCK', 'Donald', 'Trump'];
-      const regex = /^[a-zA-Z\s]*$/; // Only allows English letters and spaces
+      const regex = /^[a-zA-Z0-9\s{Emoji}]*$/u; // Only allows English letters and spaces
       const value = event.target.value.toUpperCase();
       if (!regex.test(value) || restrictedWords.some(word => value.includes(word))) {
-        event.target.value = value.replace(/[^a-zA-Z\s]/g, '').replace(new RegExp(restrictedWords.join('|'), 'gi'), '');
+        event.target.value = value.replace(/[^\p{L}\p{N}\p{Emoji}]/gu, '').replace(new RegExp(restrictedWords.join('|'), 'gi'), '');
         alert('Invalid input. Please use only English letters and avoid restricted words.');
       }
       previewBtn.style.display = 'inline-block';
