@@ -72,6 +72,10 @@
       transform: translate(-50%, -50%);
       cursor: move;
     }
+    .text-input::placeholder {
+      color: white; /* Set the placeholder text color to white */
+      opacity: 0.7; /* Ensure full opacity for better visibility */
+    }
   </style>
 </head>
 
@@ -83,7 +87,7 @@
     This application is only available on mobile and tablet devices.
   </div>
 
-  <textarea id="main-text-box" class="text-input" maxlength="50" placeholder="Type here..."></textarea>
+  <textarea id="main-text-box" class="text-input" maxlength="12" placeholder="Type here..."></textarea>
 
   <canvas id="canvas"></canvas>
 
