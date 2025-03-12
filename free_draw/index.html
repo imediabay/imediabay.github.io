@@ -244,7 +244,7 @@
         event.target.value = value
           .replace(/[^\p{L}\p{N}\p{Emoji}]/gu, '', '') 
           .replace(new RegExp(restrictedWords.join('|'), 'gi'), ''); 
-        alert('Invalid input. Please use only English letters, numbers, emojis, and avoid restricted words.');
+        // alert('Invalid input. Please use only English letters, numbers, emojis, and avoid restricted words.');
       }
       previewBtn.style.display = 'inline-block';
     }
