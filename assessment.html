@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Assessment Only</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="">
+  <div class="container my-5">
+
+    <!-- FORM SECTION -->
+    <div id="formSection" class="form-section">
+      <h3 class="mb-4 text-center">Enter Your Details</h3>
+      <form id="userForm">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" class="form-control" id="userName" required />
+        </div>
+        <!-- <div class="form-group">
+          <label>Company</label>
+          <input type="text" class="form-control" id="userCompany" required />
+        </div>
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" id="userEmail" required />
+        </div> -->
+        <button type="submit" class="btn btn-primary quiz-btn">Start Quiz</button>
+      </form>
+    </div>
+
+    <!-- QUIZ SECTION -->
+    <div id="quizSection" class="quiz-section">
+      <h3 class="mb-4">Assessment Questions</h3>
+      <div id="quizContent"></div>
+    </div>
+
+    <!-- RESULT SECTION -->
+    <div id="resultSection" class="result-section text-center mt-5">
+      <div id="resultMessage" class="result"></div>
+      <button id="retestBtn" class="btn btn-warning mt-3">Retest</button>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("formSection").style.display = "block";
+
+    const questions = [
+      { q: "Which platform is utilised in Home Depot's advertising ecosystem for campaign planning and activation?", options: ["Meta ads", "Smartsheet", "Vantage", "Placement.IO"], ans: 2 },
+      { q: "What is the role of a PIO number in campaign management?", options: ["It helps determine the campaign’s success rate", "It acts as a reference number to identify a campaign", "It tracks customer engagement on Pinterest", "It measures the campaign’s reach"], ans: 1 },
+      { q: "What are the two types of Pinterest audience segments available?", options: ["Pinterest shopping prospecting & Pinterest shopping retargeting", "Pinterest display advertising & Pinterest video advertising", "Pinterest email marketing & Pinterest search ads", "Pinterest premium users & Pinterest free users"], ans: 0 },
+      { q: "Based on the data from Smartsheet, what should be added to the Ad Platform section?", options: ["Customer reviews", "Product groups", "Randomized ad copy", "Payment details"], ans: 1 },
+      { q: "How are creatives handled in dynamic Pinterest campaigns?", options: ["Advertisers manually design them", "Automatically generated based on Pinterest shop images", "Outsourced to third-party designers", "Manually uploaded by email"], ans: 1 },
+      { q: "What should be done if the product count in Vantage differs significantly from the expected count?", options: ["Continue the process without any changes", "Adjust the count manually", "Notify the THD team", "Ignore the difference"], ans: 2 },
+      { q: "The taxonomy name must be manually updated after a campaign is created", options: ["True", "False"], ans: 1 },
+      { q: "How can advertisers ensure the correct product details are being used in Vantage?", options: ["By referencing the creative details/flight direction in Smartsheet", "By randomly selecting product categories", "By using historical customer preferences", "By adjusting ad placement settings manually"], ans: 0 },
+      { q: "What happens when a THD DAM ID is pasted into the Vantage tool?", options: ["A new campaign is created", "The campaign is automatically launched", "The product pricing is adjusted", "The ad creative is automatically populated"], ans: 3 },
+      { q: "What does the Smartsheet column “OMIS ID/Creative Brief (THD input)” provide?", options: ["The total campaign budget", "Customer reviews and ratings", "The product category information", "The estimated campaign reach"], ans: 2 }
+    ];
+
+    let userName = "";
+    let currentQ = 0;
+    let userAnswers = [];
+
+    document.getElementById("userForm").onsubmit = function (e) {
+      e.preventDefault();
+      userName = document.getElementById("userName").value;
+      document.getElementById("formSection").style.display = "none";
+      document.getElementById("quizSection").style.display = "block";
+      loadQuestion(currentQ);
+    };
+
+    function loadQuestion(index) {
+      const container = document.getElementById("quizContent");
+      const q = questions[index];
+      container.innerHTML = `
+        <p><strong>Q${index + 1}:</strong> ${q.q}</p>
+        ${q.options.map((opt, i) => `
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="option" value="${i}" id="opt${i}" required>
+            <label class="form-check-label" for="opt${i}">${opt}</label>
+          </div>`).join('')}
+        <button class="btn btn-primary mt-3" id="nextQBtn">${index < questions.length - 1 ? 'Next' : 'Submit'}</button>
+      `;
+
+      document.getElementById("nextQBtn").onclick = () => {
+        const selected = document.querySelector('input[name="option"]:checked');
+        if (!selected) return alert("Please select an answer!");
+        userAnswers[index] = parseInt(selected.value);
+        currentQ++;
+        if (currentQ < questions.length) {
+          loadQuestion(currentQ);
+        } else {
+          showResults();
+        }
+      };
+    }
+
+    function showResults() {
+      let score = 0;
+      questions.forEach((q, i) => {
+        if (userAnswers[i] === q.ans) score++;
+      });
+
+      document.getElementById("quizSection").style.display = "none";
+      let msg = `Hey ${userName}, you scored ${score}/10. `;
+      if (score === 10) msg += "🎉 Awesome! You got full marks!";
+      else if (score >= 7) msg += "✅ Congrats! You passed!";
+      else msg += "❌ You failed.";
+
+      document.getElementById("resultMessage").textContent = msg;
+      document.getElementById("resultSection").style.display = "block";
+    }
+
+    document.getElementById("retestBtn").onclick = () => {
+      currentQ = 0;
+      userAnswers = [];
+      document.getElementById("resultSection").style.display = "none";
+      document.getElementById("quizSection").style.display = "block";
+      loadQuestion(currentQ);
+    };
+  </script>
+</body>
+</html>
