@@ -6,7 +6,34 @@
   <title>Quiz Assessment Only</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body{
+        background: #ffffff;
+    }
+    .form-section, .quiz-section, .result-section {
+      display: none;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .result {
+      font-size: 1.5em;
+    }
+    .btn{
+        background-color: #f46f12;
+        border-color: #c05509;
+        color: #ffffff!important;
+    }
+    .btn:hover, .btn-primary.focus, .btn-primary:focus,.btn-primary:active, .btn-warning:not(:disabled):not(.disabled).active, .btn-warning:not(:disabled):not(.disabled):active, .show>.btn-warning.dropdown-toggle{
+        background-color: #ba5105!important;
+        border-color: #c05509;
+        color: #ffffff!important;
+    }
+    .btn-warning.focus, .btn-warning:focus{
+        color: #ffffff!important;
+    }
+    
+  </style>
 </head>
 
 <body class="">
@@ -14,20 +41,13 @@
 
     <!-- FORM SECTION -->
     <div id="formSection" class="form-section">
-      <h3 class="mb-4 text-center">Enter Your Details</h3>
+      <h3 class="mb-4 text-center">Enter your name to start the assessment.</h3>
       <form id="userForm">
         <div class="form-group">
-          <label>Name</label>
+          <label></label>
           <input type="text" class="form-control" id="userName" required />
         </div>
-        <!-- <div class="form-group">
-          <label>Company</label>
-          <input type="text" class="form-control" id="userCompany" required />
-        </div>
-        <div class="form-group">
-          <label>Email address</label>
-          <input type="email" class="form-control" id="userEmail" required />
-        </div> -->
+       
         <button type="submit" class="btn btn-primary quiz-btn">Start Quiz</button>
       </form>
     </div>
@@ -56,15 +76,17 @@
       { q: "Based on the data from Smartsheet, what should be added to the Ad Platform section?", options: ["Customer reviews", "Product groups", "Randomized ad copy", "Payment details"], ans: 1 },
       { q: "How are creatives handled in dynamic Pinterest campaigns?", options: ["Advertisers manually design them", "Automatically generated based on Pinterest shop images", "Outsourced to third-party designers", "Manually uploaded by email"], ans: 1 },
       { q: "What should be done if the product count in Vantage differs significantly from the expected count?", options: ["Continue the process without any changes", "Adjust the count manually", "Notify the THD team", "Ignore the difference"], ans: 2 },
-      { q: "The taxonomy name must be manually updated after a campaign is created", options: ["True", "False"], ans: 1 },
+      { q: "The taxonomy name must be manually updated after a campaign is created in Pinterest", options: ["True", "False"], ans: 1 },
       { q: "How can advertisers ensure the correct product details are being used in Vantage?", options: ["By referencing the creative details/flight direction in Smartsheet", "By randomly selecting product categories", "By using historical customer preferences", "By adjusting ad placement settings manually"], ans: 0 },
       { q: "What happens when a THD DAM ID is pasted into the Vantage tool?", options: ["A new campaign is created", "The campaign is automatically launched", "The product pricing is adjusted", "The ad creative is automatically populated"], ans: 3 },
       { q: "What does the Smartsheet column “OMIS ID/Creative Brief (THD input)” provide?", options: ["The total campaign budget", "Customer reviews and ratings", "The product category information", "The estimated campaign reach"], ans: 2 }
     ];
-
+    const webAppUrl = 'https://script.google.com/a/macros/iopex.com/s/AKfycbwfpvueAUjxMMeADOz5zFg8upP2jydEb7dijohgiPgW6HquPa-7v-fhc5DMmDkyJS64/exec'; // Web App URL
     let userName = "";
     let currentQ = 0;
     let userAnswers = [];
+
+    document.getElementById('formSection').style.display = 'block';
 
     document.getElementById("userForm").onsubmit = function (e) {
       e.preventDefault();
@@ -108,13 +130,30 @@
 
       document.getElementById("quizSection").style.display = "none";
       let msg = `Hey ${userName}, you scored ${score}/10. `;
-      if (score === 10) msg += "🎉 Awesome! You got full marks!";
-      else if (score >= 7) msg += "✅ Congrats! You passed!";
-      else msg += "❌ You failed.";
+      if (score === 10) msg += "🏆 Outstanding! Full marks! You're a superstar!";
+      else if (score >= 7) msg += "🎉 Fantastic! You've passed! Keep up the great work!";
+      else if (score >= 4) msg += "😊 Good effort! Strive for higher score!";
+      else msg += "🙂 Keep striving for a better score!";
 
       document.getElementById("resultMessage").textContent = msg;
       document.getElementById("resultSection").style.display = "block";
+
+      fetch(webAppUrl, {
+        method: 'POST',
+        body: new URLSearchParams({ Name: userName, Score: score })
+      }).then(response => response.json())
+        .then(data => {
+          if (data.result === 'success') {
+            console.log('Data sent successfully!');
+          } else {
+            console.error('Error sending data:', data.error);
+          }
+        });
     }
+
+    // Send data to Google Sheets
+    
+    
 
     document.getElementById("retestBtn").onclick = () => {
       currentQ = 0;
